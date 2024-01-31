@@ -1,0 +1,21 @@
+name: 📝 Typo or Grammar Fix
+description: That doesn't sound right!
+labels: [typo]
+assignees:
+  - haackt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for wanting to report a typo or grammatical error 📝! To address this bug as fast as possible, there is some more information needed
+  - type: textarea
+    id: found
+    attributes:
+      label: Information
+      description: What's wrong? Where did you it?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context

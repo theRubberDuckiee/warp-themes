@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css';
+
+@keyframes cursor-blink {
+	0% {
+		visibility: hidden;
+	}
+}
+
+.react-colorful {
+	width: 100% !important;
+	height: 8rem !important;
+	aspect-ratio: 1 / 1 !important;
+}
+.react-colorful__last-control {
+	border-radius: 0 !important;
+}
+.react-colorful__saturation-pointer {
+	width: 1.5rem !important;
+	height: 1.5rem !important;
+}
+.react-colorful__hue-pointer {
+	width: 1rem !important;
+	height: 1rem !important;
+}

@@ -1,0 +1,27 @@
+name: 🚀 Feature request
+description: That sould be a thing! ✨
+labels: [enhancement]
+assignees:
+  - haackt
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks you for opening a feature request 🚀 To adress this request as fast as possible, there is some more information needed
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: What problem should be solved? What is the need that you try to fulfill?
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-solution
+    attributes:
+      label: Suggested Solution
+      description: How could that feature be implemented?
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Everything else, that might be relevant for this feature request
