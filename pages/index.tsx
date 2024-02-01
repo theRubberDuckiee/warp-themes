@@ -9,7 +9,7 @@ import WarpApp from '@components/Warp';
 function IndexPage() {
 	return (
 		<>
-			<Head>
+			{/* <Head>
 				<title>Warp-Themes - Theme Builder for Warp</title>
 
 				<meta name='title' content='Warp-Themes - Theme Builder for Warp' />
@@ -24,7 +24,7 @@ function IndexPage() {
 				/>
 				<meta
 					property='og:image'
-					content='https://raw.githubusercontent.com/haackt/warp-themes/main/.github/assets/hero.png'
+					content='https://raw.githubusercontent.com/theRubberDuckiee/warp-themes/main/.github/assets/hero.png'
 				/>
 
 				<meta property='twitter:card' content='summary_large_image' />
@@ -36,7 +36,7 @@ function IndexPage() {
 				/>
 				<meta
 					property='twitter:image'
-					content='https://raw.githubusercontent.com/haackt/warp-themes/main/.github/assets/hero.png'
+					content='https://raw.githubusercontent.com/theRubberDuckiee/warp-themes/main/.github/assets/hero.png'
 				/>
 				<meta name='keywords' content='Warp, Theme, Creator, Terminal, Color, Warp-Themes' />
 				<meta name='robots' content='index, follow' />
@@ -48,9 +48,7 @@ function IndexPage() {
 				<link rel='mask-icon' href='/safari-pinned-tab.svg' color='#414141' />
 				<meta name='msapplication-TileColor' content='#603cba' />
 				<meta name='theme-color' content='#ffffff' />
-
-				<Script data-goatcounter='https://haack.goatcounter.com/count' src='//gc.zgo.at/count.js' async />
-			</Head>
+			</Head> */}
 			<AppLayout Navbar={<AppNavbar />} Sidebar={<AppSidebar />} WarpApp={<WarpApp />} />
 		</>
 	);

@@ -87,7 +87,6 @@ function AppDialogAbout(props: Props) {
 						<div className='divider'></div>
 						<p className='text-xs text-center text-gray-700'>
 							Built with Next.js, hosted on Vercel <br />
-							&copy; 2022 Torben Haack
 						</p>
 					</Dialog.Panel>
 				</div>

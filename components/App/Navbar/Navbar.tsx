@@ -74,13 +74,6 @@ function AppNavbar() {
 							<li className='menu-title'>
 								<span>General</span>
 							</li>
-							<li className='disabled'>
-								<label className='modal-buton flex items-center'>
-									<AdjustmentsIcon className='w-6 h-6' />
-									Settings
-									<div className='badge badge-sm badge-primary'>Soon</div>
-								</label>
-							</li>
 							<li>
 								<button onClick={() => setIsAboutDialogOpen(true)} className='text-sm'>
 									<InformationCircleIcon className='w-6 h-6' />
@@ -98,7 +91,7 @@ function AppNavbar() {
 							</li>
 							<li>
 								<a
-									href='https://github.com/haackt/warp-companion'
+									href='https://github.com/theRubberDuckiee/warp-companion'
 									target='_blank'
 									rel='noopener noreferrer'
 									className='text-sm'
@@ -119,16 +112,9 @@ function AppNavbar() {
 								</a>
 							</li>
 							<li>
-								<a href='https://www.github.com/haackt/warp-themes' target='_blank' rel='noopener noreferrer'>
+								<a href='https://www.github.com/theRubberDuckiee/warp-themes' target='_blank' rel='noopener noreferrer'>
 									<CodeIcon className='w-6 h-6 inline' />
 									GitHub
-									<ExternalLinkIcon className='w-4 h-4 ml-auto' />
-								</a>
-							</li>
-							<li>
-								<a href='https://github.com/sponsors/haackt' target='_blank' rel='noopener noreferrer'>
-									<CashIcon className='w-6 h-6 inline' />
-									Donate
 									<ExternalLinkIcon className='w-4 h-4 ml-auto' />
 								</a>
 							</li>

@@ -3,7 +3,7 @@ description: Something doesn't seems right 🧐
 title: '[BUG] '
 labels: [bug]
 assignees:
-  - haackt
+  - theRubberDuckiee
 body:
   - type: markdown
     attributes:

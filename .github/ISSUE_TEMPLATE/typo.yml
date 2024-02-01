@@ -2,7 +2,7 @@ name: 📝 Typo or Grammar Fix
 description: That doesn't sound right!
 labels: [typo]
 assignees:
-  - haackt
+  - theRubberDuckiee
 body:
   - type: markdown
     attributes:

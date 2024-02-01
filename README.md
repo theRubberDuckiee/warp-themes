@@ -1,5 +1,3 @@
-> I'm currently in the process of reworking Warp-Themes and Warp-Companion. Stay tuned for future updates 🎉
-
 <a name="readme-top"></a>
 <br />
 
@@ -14,10 +12,9 @@
   <h3><a href="https://warp-themes.com"><strong>✨ Try it out now ✨</strong></a></h3>
     
   <br/>
-  <a href="https://github.com/haackt/warp-themes/issues"> 🐛 Report a Bug</a>&nbsp;&nbsp;·&nbsp; 
-  <a href="https://github.com/haackt/warp-themes/issues">🚀 Request a Feature</a>
+  <a href="https://github.com/theRubberDuckiee/warp-themes/issues"> 🐛 Report a Bug</a>&nbsp;&nbsp;·&nbsp; 
+  <a href="https://github.com/theRubberDuckiee/warp-themes/issues">🚀 Request a Feature</a>
   <br />
-  <h4><a href="https://github.com/sponsors/haackt">☕️ Support the Development</a></h4>
 </div>
 
 ## About
@@ -52,14 +49,14 @@ You can install your newly created theme easily via the terminal. If you're skep
 
 ## Extension
 
-If you're using Visual Studio Code, also try out [**Warp-Companion**](https://github.com/haackt/warp-companion) 🧙🏻‍♂️
+If you're using Visual Studio Code, also try out [**Warp-Companion**](https://marketplace.visualstudio.com/items?itemName=haack.warp-companion) 🧙🏻‍♂️
 
 ## Special Thanks
 
-Special thanks to the awesome team over at [Warp](https://warp.dev/). They not only sponsored the domain ([warp-themes.com](https://warp-themes.com/)) but also gave me feedback and suggestions for improvement, after reaching out to me, after the first time tweeting about the project ✨
+Special thanks to the Torben Haack for most of the original source code.
 
 ## Contact
 
-[@torben_haack](https://twitter.com/torben_haack) – hi@warp-themes.com
+[Warp's Official Twitter](https://twitter.com/warpdotdev)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
