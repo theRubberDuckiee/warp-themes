@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, getDoc, doc } from 'firebase/firestore';
 import YAML from 'json-to-pretty-yaml';
+// import { firebaseConfig } from './create';
 
 const firebaseConfig = {
 	apiKey: process.env.FIREBASE_API_KEY,

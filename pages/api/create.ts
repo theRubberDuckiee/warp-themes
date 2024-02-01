@@ -11,6 +11,16 @@ const firebaseConfig = {
 	appId: process.env.FIREBASE_APP_ID,
 };
 
+// export const firebaseConfig = {
+// 	apiKey: "AIzaSyBzZfDNCqyrwUW8DvWSnEBn-Q-6mIzxADQ",
+// 	authDomain: "warp-themes-cf724.firebaseapp.com",
+// 	projectId: "warp-themes-cf724",
+// 	storageBucket: "warp-themes-cf724.appspot.com",
+// 	messagingSenderId: "227546572873",
+// 	appId: "1:227546572873:web:4251b2470105d315223798",
+// 	measurementId: "G-YY8ELH4ZN6"
+//   };
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
