@@ -13,54 +13,8 @@ interface Props {
 }
 
 function AppLayout(props: Props) {
-	const [isAboutDialogOpen, setIsAboutDialogOpen] = useState(false);
-
-	useEffect(() => {
-		window.onbeforeunload = function () {
-			return true;
-		};
-
-		const toastId = toast.custom((t) => (
-			<Transition
-				show={t.visible}
-				enter='transition-opacity duration-75'
-				enterFrom='opacity-0'
-				enterTo='opacity-100'
-				leave='transition-opacity duration-150'
-				leaveFrom='opacity-100'
-				leaveTo='opacity-0'
-			>
-				<div className='bg-white px-6 py-4 shadow-md rounded-md'>
-					<p>
-						Welcome to <span className='font-medium'>Warp-Themes</span>! 👋 <br />
-						<i>Warp-Themes</i> is a theme builder for{' '}
-						<a href='https://warp.dev' target='_blank' className='text-blue-500 hover:text-blue-700'>
-							Warp
-						</a>
-						.
-					</p>
-					<div className='flex gap-2 mt-1'>
-						<label
-							className='btn flex-grow btn-ghost text-primary modal-button'
-							onClick={() => {
-								setIsAboutDialogOpen(true);
-								toast.dismiss(toastId);
-							}}
-						>
-							Learn more
-						</label>
-						<button onClick={() => toast.dismiss(toastId)} className='btn btn-ghost flex-grow text-red-500'>
-							Dismiss
-						</button>
-					</div>
-				</div>
-			</Transition>
-		));
-	}, []);
-
 	return (
 		<div className='flex h-screen flex-col bg-slate-100 sm:bg-white overflow-y-hidden'>
-			<AppDialogAbout _open={isAboutDialogOpen} _onClose={() => setIsAboutDialogOpen(false)} />
 			<div className='w-full border-b z-20 hidden sm:block'>{props.Navbar}</div>
 			<div className='flex h-full flex-row z-10'>
 				<div className='w-auto border-r hidden sm:block'>{props.Sidebar}</div>
@@ -86,11 +40,6 @@ function AppLayout(props: Props) {
 					</div>
 				</div>
 			</div>
-			<Toaster
-				containerClassName='z-20 hidden sm:block'
-				position='bottom-right'
-				toastOptions={{ duration: 10000 }}
-			/>
 		</div>
 	);
 }

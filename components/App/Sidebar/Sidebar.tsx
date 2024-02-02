@@ -5,6 +5,8 @@ import ColorInput from './ColorInput';
 import { Tab } from '@headlessui/react';
 import ThemeInput from './ThemeInput';
 import SidebarTitle from './Title';
+import AppDialogAbout from '../Dialogs/About';
+import AppDialogDownload from '../Dialogs/Download';
 
 function AppSidebar() {
 	const [context, setContext] = useAppContext();
@@ -293,6 +295,7 @@ function AppSidebar() {
 							/>
 						</div>
 					</Tab.Panel>
+					<AppDialogDownload/>
 				</Tab.Panels>
 			</Tab.Group>
 		</div>
