@@ -3,7 +3,7 @@ import SimplifiedBlock from "@components/Shared-Themes/SimplifiedBlock";
 import SimplifiedNavBar from "@components/Shared-Themes/SimplifiedNavBar";
 import SimplifiedPrompt from "@components/Shared-Themes/SimplifiedPrompt";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../pages/api/create";
+import { db } from "../../pages/api/create";
 import AppLayout from '@components/App/Layout';
 import AppNavbar from '@components/App/Navbar/Navbar';
 

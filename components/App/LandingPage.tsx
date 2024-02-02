@@ -1,4 +1,4 @@
-import CommunityThemes from '@components/community-themes';
+import CommunityThemes from '@components/App/Community-themes';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 

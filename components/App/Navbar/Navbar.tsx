@@ -5,7 +5,7 @@ import { Popover, Transition } from '@headlessui/react';
 import { usePopper } from 'react-popper';
 import AppDialogAbout from '../Dialogs/About';
 import AppDialogITermColors from '../Dialogs/iTermColors';
-import WarpThemesLogo from '@components/WarpThemesLogo';
+import WarpThemesLogo from '@components/App/WarpThemesLogo';
 import router from 'next/router';
 
 function AppNavbar() {
