@@ -21,6 +21,6 @@
 			"@lib/*": ["./lib/*"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Warp/Navbar/SystemButton"],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Create-Theme/Warp/Navbar/SystemButton"],
 	"exclude": ["node_modules"]
 }

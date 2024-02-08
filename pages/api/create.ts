@@ -48,12 +48,11 @@ async function handler(request: NextApiRequest, response: NextApiResponse) {
 	};
 
 	try {
-		console.log('A')
 		const docRef = await addDoc(themesCollectionRef, {
 			name: request.body.name,
 			content: request.body.content,
+			username: request.body.username,
 		});
-		console.log('B')
 		responseObj.status = 200;
 		responseObj.tId = docRef.id;
 	} catch (e) {

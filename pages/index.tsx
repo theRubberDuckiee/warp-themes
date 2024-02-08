@@ -1,5 +1,6 @@
-import LandingPage from '@components/App/LandingPage';
-import AppNavbar from '@components/App/Navbar/Navbar';
+import LandingPage from "@components/Community-Themes/LandingPage";
+import AppNavbar from "@components/Shared/Navbar/Navbar";
+
 
 function Index() {
 	return (

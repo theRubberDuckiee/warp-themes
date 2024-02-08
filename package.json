@@ -16,6 +16,7 @@
 		"daisyui": "^2.19.1",
 		"firebase": "^9.23.0",
 		"json-to-pretty-yaml": "^1.2.2",
+		"jszip": "^3.10.1",
 		"next": "^12.2.2",
 		"plist": "^3.0.6",
 		"postcss": "^8.4.14",

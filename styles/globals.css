@@ -10,6 +10,15 @@
 	}
 }
 
+@font-face {
+    font-family: 'JetBrains Mono Nerd Font Mono';
+    src: url('JetBrainsMono.ttf') format('truetype');
+}
+
+.font-jetbrainsmononerdfont {
+    font-family: 'JetBrains Mono Nerd Font Mono', monospace;
+}
+
 .react-colorful {
 	width: 100% !important;
 	height: 8rem !important;
