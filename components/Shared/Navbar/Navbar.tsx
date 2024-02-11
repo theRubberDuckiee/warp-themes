@@ -18,7 +18,7 @@ function AppNavbar() {
       <button onClick={navigateToCreateTheme} className='btn btn-ghost'>
         Create a theme
       </button>
-      <a href="https://warp.dev" target="_blank" rel="noopener noreferrer" className='btn btn-ghost'>
+      <a href="https://warp.dev/utm_source=warp-themes" target="_blank" rel="noopener noreferrer" className='btn btn-ghost'>
         Made by Warp
       </a>
     </nav>
