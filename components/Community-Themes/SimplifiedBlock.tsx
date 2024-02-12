@@ -1,6 +1,7 @@
 import { useAppContext } from '@lib/AppContext';
 
 import WarpAppBlock from '@components/Create-Theme/Warp/Block';
+import SimplifiedNeofetch from './SimplifiedNeofetch';
 
 interface Props {
     theme: any;
@@ -8,11 +9,9 @@ interface Props {
 
 function WarpAppCommand_Neofetch(props: Props) {
 	return (
-		<WarpAppBlock command='neofetch' execution_time='0.016s'>
-			<div className='flex flex-row items-center'>
-                hi
-			</div>
-		</WarpAppBlock>
+		<div className='flex flex-row items-center' >
+			<SimplifiedNeofetch theme={props.theme}/>
+		</div>
 	);
 }
 

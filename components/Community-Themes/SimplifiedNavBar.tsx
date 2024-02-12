@@ -1,9 +1,10 @@
 import { WarpAppBlockDivider } from "@components/Create-Theme/Warp/Block";
 import WarpAppNavbarSystemButtons from "@components/Create-Theme/Warp/Navbar/SystemButton";
 import ThemeTab from "./ThemeTab";
+import { Theme } from "interface";
 
 interface Props {
-    theme: any;
+    theme: Theme;
 }
 
 function SimplifiedNavBar({theme}) {

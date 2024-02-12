@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../pages/api/create";
 import ThemeCard from './ThemeCard';
 
 export default function AllCommunityThemes({setUploadedThemesCount, themes, loading}) {

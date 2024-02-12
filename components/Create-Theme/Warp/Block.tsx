@@ -18,7 +18,7 @@ function WarpAppBlock(props: Props) {
 	const { command, execution_time, children } = props;
 
 	return (
-		<div className='relative pt-3 pb-4 font-jetbrainsmononerdfont'>
+		<div className='w-full relative pt-3 pb-4 font-jetbrainsmononerdfont'>
 			<div className='pl-4 text-left'>
 				<p className='text-xs font-bold opacity-60'>~/Documents ({execution_time})</p>
 				<p className='pb-1 text-base font-extrabold'>{command}</p>
