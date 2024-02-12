@@ -75,7 +75,7 @@ export default function FeaturedCommunityThemes() {
       theme: {
         data: {
           content: draculaTheme,
-          name: 'Gruvbox Dark',
+          name: 'Dracula',
         }
       }
     },
