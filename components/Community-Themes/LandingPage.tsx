@@ -4,6 +4,7 @@ import AllCommunityThemes from './AllCommunityThemes';
 import FeaturedCommunityThemes from './FeaturedCommunityThemes';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from 'pages/api/create';
+import * as ga from '../../utils';
 
 export default function LandingPage() {
   const [view, setView] = useState<'featured' | 'all'>('featured');
@@ -43,7 +44,21 @@ export default function LandingPage() {
 
   const navigateToCreateTheme = () => {
     router.push('/create-theme');
+    ga.logPageView(); // Log page view when navigating
   };
+
+  // Attach Google Analytics tracking to route change events
+  useEffect(() => {
+    const handleRouteChange = () => {
+      ga.logPageView();
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, []);
 
   return (
     <div className="text-center p-8 pt-32 dark:bg-gray-900 dark:text-white">

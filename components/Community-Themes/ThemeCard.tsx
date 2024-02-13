@@ -8,7 +8,6 @@ interface Props {
 }
 
 function ThemeCard({theme, image}: Props) {
-    console.log('poo', theme)
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="ThemeCardContainer flex justify-center">
