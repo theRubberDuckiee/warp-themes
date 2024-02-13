@@ -7,7 +7,8 @@ interface Props {
     image?: string,
 }
 
-function ThemeCard({ theme, image }: Props) {
+function ThemeCard({theme, image}: Props) {
+    console.log('poo', theme)
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="ThemeCardContainer flex justify-center">
@@ -32,7 +33,7 @@ function ThemeCard({ theme, image }: Props) {
                         Download Theme
                     </button>
                 </div>
-                {theme && <DownloadTheme isOpen={isOpen} setIsOpen={setIsOpen} theme={theme}/>}
+                {theme && <DownloadTheme isOpen={isOpen} setIsOpen={setIsOpen} theme={theme} themeName={theme.name}/>}
             </div>
         </div>
     );

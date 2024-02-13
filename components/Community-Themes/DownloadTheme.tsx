@@ -2,85 +2,43 @@ import WarpAppNavbarSystemButtons from '@components/Create-Theme/Warp/Navbar/Sys
 import { Dialog, Transition } from '@headlessui/react';
 import DownloadIcon from '@heroicons/react/outline/DownloadIcon';
 import { useAppContext } from '@lib/AppContext';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import YAML from 'json-to-pretty-yaml';
 import JSZip from 'jszip';
+import { getWarpTheme, getiTerm2Theme } from 'utils';
+import { Theme } from 'interface';
+
+enum TerminalType {
+    Warp = 'Warp',
+    iTerm2 = 'iTerm2',
+  }
 
 interface Props {
     isOpen: boolean,
     setIsOpen: Dispatch<SetStateAction<boolean>>,
     theme: any
     imgSrc?: string
+    themeName: string
 }
 
-export function DownloadTheme({isOpen, setIsOpen, theme, imgSrc}: Props) {
-    const context = theme.data.content
-    const name = theme.data.name 
-    const backgroundImageSrc = theme.data.backgroundImageSrc
-
-
-    function downloadTheme() {
-        const myTheme = YAML.stringify({
-            accent: context.accent,
-            background: context.background,
-            foreground: context.foreground,
-            details: context.details,
-            terminal_colors: {
-                normal: {
-                    black: context.terminal_colors.normal.black,
-                    red: context.terminal_colors.normal.red,
-                    green: context.terminal_colors.normal.green,
-                    yellow: context.terminal_colors.normal.yellow,
-                    blue: context.terminal_colors.normal.blue,
-                    magenta: context.terminal_colors.normal.magenta,
-                    cyan: context.terminal_colors.normal.cyan,
-                    white: context.terminal_colors.normal.white,
-                },
-                bright: {
-                    black: context.terminal_colors.bright.black,
-                    red: context.terminal_colors.bright.red,
-                    green: context.terminal_colors.bright.green,
-                    yellow: context.terminal_colors.bright.yellow,
-                    blue: context.terminal_colors.bright.blue,
-                    magenta: context.terminal_colors.bright.magenta,
-                    cyan: context.terminal_colors.bright.cyan,
-                    white: context.terminal_colors.bright.white,
-                },
-            },
-        });
+export function DownloadTheme({isOpen, setIsOpen, theme, imgSrc, themeName}: Props) {
+    const [terminal, setTerminal] = useState(TerminalType.Warp)
     
-// Create Blob for YAML file
-const yamlBlob = new Blob([myTheme], { type: 'application/yaml' });
-
-// Fetch the image file
-fetch(backgroundImageSrc)
-    .then(response => response.blob())
-    .then(imageBlob => {
-        // Create a zip file containing YAML and image
-        const zip = new JSZip();
-        zip.file(`${name}.yaml`, yamlBlob, { binary: true });
-        zip.file(`${name}.png`, imageBlob, { binary: true });
-
-        // Generate download link for the zip file
-        zip.generateAsync({ type: 'blob' }).then(blob => {
-            const objectURL = window.URL.createObjectURL(blob);
-
-            // Create a download link for the zip file
-            const downloadLink = document.createElement('a');
-            downloadLink.href = objectURL;
-            downloadLink.download = `${name}_theme.zip`;
-            document.body.appendChild(downloadLink);
-
-            // Trigger download
-            downloadLink.click();
-
-            // Clean up
-            downloadLink.remove();
-            window.URL.revokeObjectURL(objectURL);
-        });
-    });
+    
+    function downloadTheme(terminalType: TerminalType) {
+        console.log(theme)
+        const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.data.content) : getiTerm2Theme(theme.data.content);
+        const applicationType = terminalType === TerminalType.Warp ? 'application/yaml' : 'application/itermcolors';
+        const extension = terminalType === TerminalType.Warp ? 'yaml' : 'itermcolors';
+        const objectURL = window.URL.createObjectURL(new Blob([themeYaml], { type: applicationType }));
+        const downloadLink = document.createElement('a');
+        downloadLink.href = objectURL;
+        downloadLink.download = `${theme.data.name}.${extension}`;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+        window.URL.revokeObjectURL(objectURL);
     }
-    
 
     return (
 
@@ -90,77 +48,71 @@ fetch(backgroundImageSrc)
         <div className='fixed inset-0 flex items-center justify-center p-4'>
             <Dialog.Panel className='mx-auto max-w-5xl w-fit rounded-lg shadow-lg bg-white px-12 py-7'>
                 <Dialog.Title className='text-3xl font-semibold mb-4'>Download</Dialog.Title>
-
-                {/* <div>
-                    <span className='badge'>Recommended</span>
-                    <h2 className='text-2xl font-medium'>Automatic Installation</h2>
-                    <div className='bg-black overflow-x-scroll whitespace-nowrap text-white px-2 py-3 select-all rounded-md shadow-md my-4'>
-                        <div className='flex flex-row items-center mb-3'>
-                            <div className='flex h-full items-start justify-center'>
-                                <WarpAppNavbarSystemButtons type='close' />
-                                <WarpAppNavbarSystemButtons type='min' />
-                                <WarpAppNavbarSystemButtons type='max' />
-                            </div>
-                        </div>
-                        <code className='pr-3 pl-1'>
-                            <span
-                                style={{ color: context.terminal_colors.normal.magenta }}
-                                className='font-semibold'
-                            >
-                                curl
-                            </span>{' '}
-                            <span style={{ color: context.terminal_colors.bright.black }}>-s -N</span>{' '}
-                            <span style={{ color: context.terminal_colors.bright.black }}>|</span>{' '}
-                            <span style={{ color: context.terminal_colors.normal.magenta }}>bash</span>
-                        </code>
-                    </div>
-                    <div className='w-full flex flex-row justify-evenly'>
-                        <label
-                            className='btn bg-black btn-wide swap text-lg'
-                            role='button'
-                            onClick={() => {
-                                navigator.clipboard.writeText(
-                                    'poo'
-                                );
-                                setTimeout(() => {
-                                    //@ts-ignore
-                                    document.getElementById('copied-curl-code').checked = false;
-                                }, 1500);
-                            }}
-                        >
-                            <input type='checkbox' id='copied-curl-code' />
-                            <div className='swap-on'>✅ Copied</div>
-                            <div className='swap-off'>📋 Copy</div>
-                        </label>
-                    </div>
-                </div> */}
-                {/* <div className='divider'>OR</div> */}
                 <div className='text-gray-700'>
                     <h2 className='text-2xl font-medium mb-3'>Manual Installation</h2>
                     <h3 className='text-xl py-3'>Instructions</h3>
-                    <ol className='list-decimal ml-4'>
-                        <li>Download the file</li>
-                        <li>
-                            Place the theme file into{' '}
-                            <code className='text-sm bg-black text-white px-2 rounded'>~/.warp/themes/</code>
-                        </li>
-                        <li>Restart Warp</li>
-                        <li>
-                            Open the Command Palette (<kbd className='kbd kbd-sm'>⌘</kbd> +{' '}
-                            <kbd className='kbd kbd-sm'>P</kbd>) and search for <i>Open Theme Picker</i>
-                        </li>
-                        <li>Enjoy your new theme ✨</li>
-                    </ol>
+                    {terminal == TerminalType.iTerm2 ?
+                        <ol className='list-decimal ml-4'>
+                            <li>Go into iTerm2</li>
+                            <li>Press <kbd className='kbd kbd-sm'>⌘</kbd> +{' '}
+                                <kbd className='kbd kbd-sm'>i</kbd> and navigate to the Colors tab</li>
+                            <li>Click on Load Presets</li>
+                            <li>Click on Import</li>
+                            <li>Select the .itermcolors file of the scheme you'd like to use.</li>
+                            <li>Enjoy your new theme ✨</li>
+                        </ol> : 
+                        <ol className='list-decimal ml-4'>
+                            <li>Download the file</li>
+                            <li>
+                                Place the theme file into{' '}
+                                <code className='text-sm bg-black text-white px-2 rounded'>~/.warp/themes/</code>
+                            </li>
+                            <li>Restart Warp</li>
+                            <li>
+                                Open the Command Palette (<kbd className='kbd kbd-sm'>⌘</kbd> +{' '}
+                                <kbd className='kbd kbd-sm'>P</kbd>) and search for <i>Open Theme Picker</i>
+                            </li>
+                            <li>Enjoy your new theme ✨</li>
+                        </ol>
+                    }
+                    <div className="flex items-center gap-4 mt-2">
+                        <label htmlFor="appSelect" className="font-medium">Select Terminal:</label>
+                        <div className="relative">
+                            <select
+                                id="appSelect"
+                                value={terminal}
+                                onChange={(e) => setTerminal(e.target.value as TerminalType)}
+                                className="block appearance-none w-full bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 leading-tight focus:outline-none focus:border-blue-500 focus:ring"
+                            >
+                                <option value={TerminalType.iTerm2}>iTerm2</option>
+                                <option value={TerminalType.Warp}>Warp</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                {/* Heroicon chevron-down icon */}
+                                <svg
+                                    className="h-4 w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M10 12.586L3.707 6.293a1 1 0 011.414-1.414L10 10.586l4.879-4.879a1 1 0 111.414 1.414l-5.5 5.5a1 1 0 01-1.414 0l-5.5-5.5a1 1 0 111.414-1.414L10 12.586z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                     <button
-                        onClick={downloadTheme}
+                        onClick={() => {downloadTheme(terminal)}}
                         className='btn mt-2 w-full btn-ghost flex items-center gap-2'
                     >
                         <DownloadIcon className='w-6 h-6' />
                         Download file
                     </button>
                 </div>
-
-                <div className='divider'></div>
             </Dialog.Panel>
         </div>
         </Dialog>

@@ -27,7 +27,6 @@ export default function LandingPage() {
             });
           });
           setThemes(themesData)
-          console.log(themesData)
           setUploadedThemesCount(themesData.length)
         }
       } catch (error) {

@@ -35,7 +35,6 @@ function Download() {
 		);
 
 		try {
-			console.log('context.username:', context.username)
 			const json = await (
 				await fetch('/api/create', {
 					method: 'POST',
