@@ -81,10 +81,8 @@ async function handler(request: NextApiRequest, response: NextApiResponse) {
 	const tId = request.query.tId as string;
 	const raw = request.query.raw;
 
-	console.log('C')
 	const docRef = doc(db, 'themes', tId);
 	const docSnap = await getDoc(docRef);
-	console.log('D')
 
 	if (docSnap.exists()) {
 		if (raw === 'true') {

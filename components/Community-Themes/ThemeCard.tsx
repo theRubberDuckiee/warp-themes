@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ThemePreview from './ThemePreview';
 import { DownloadTheme } from '@components/Community-Themes/DownloadTheme';
+import Link from 'next/link';
 
 interface Props {
     theme: any,
@@ -8,14 +9,18 @@ interface Props {
 }
 
 function ThemeCard({theme, image}: Props) {
+    const url = theme.id == undefined ? `/${encodeURIComponent(theme.data.name)}` : `/themes/${theme.id}`
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="ThemeCardContainer flex justify-center">
             <div className="ThemeCard p-4 rounded transition duration-300 hover:shadow-lg hover:bg-white hover:bg-opacity-10"
                  style={{ minWidth:'600px', maxWidth: '900px', width: '100%' }}>
-                <h2 className="text-lg font-bold">
-                    {theme.data.name}
-                </h2>
+                <Link href={url}>
+                    <a>
+                        {theme.data.name}
+                    </a>
+                </Link>
+
                 <div className="py-4">
                     { image ?
                     <img src={image} className="w-full h-auto rounded-lg shadow-md"/> :

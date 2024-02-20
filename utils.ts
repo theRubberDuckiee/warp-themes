@@ -1,6 +1,7 @@
 import YAML from 'json-to-pretty-yaml';
 import hexRgb from 'hex-rgb';
 import ReactGA from 'react-ga';
+import { coolNightTheme, coolNightThemeData, cyberPinkTheme, cyberpinkThemeData, draculaTheme, draculaThemeData, gruvboxDarkTheme, gruvboxDarkThemeData, linuxLaunchTheme, linuxLaunchThemeData, retroWaveTheme, retrowaveThemeData, seaShellTheme, seashellThemeData } from 'appConstants';
 
 export const initGA = () => {
 	ReactGA.initialize('G-S02J90JMSB');
@@ -11,9 +12,53 @@ export const logPageView = () => {
 	ReactGA.pageview(window.location.pathname);
 };
 
+export function getWarpThemeByName(name) {
+	switch (name) {
+		case "Gruvbox Dark":
+		  return gruvboxDarkThemeData
+		case "Cool Night":
+		  return coolNightThemeData
+		case "Cyberpink":
+			return cyberpinkThemeData
+		case "Dracula":
+			return draculaThemeData
+		case "Linux Launch":
+			return linuxLaunchThemeData
+		case "Retrowave":
+			return retrowaveThemeData
+		case "Seashell":
+			return seashellThemeData
+		default:
+		  break
+	  }
+}
+
+export function getWarpImgByName(name) {
+	switch (name) {
+		case "Gruvbox Dark":
+		  return ['/FeaturedThemes/Gruvbox/GruvboxDark.png']
+		case "Cool Night":
+		  return ['/FeaturedThemes/CoolNight/CoolNight.png']
+		case "Cyberpink":
+			return ['/FeaturedThemes/Cyberpink/Cyberpink.png']
+		case "Dracula":
+			return ['/FeaturedThemes/Dracula/Dracula.png']
+		case "Linux Launch":
+			return ['/FeaturedThemes/LinuxLaunch/LinuxLaunch.png',
+					'/FeaturedThemes/LinuxLaunch/LinuxLaunch02.png'
+		]
+		case "Retrowave":
+			return ['/FeaturedThemes/Retrowave/RetroWave.png']
+		case "Seashell":
+			return ['/FeaturedThemes/Seashell/Seashell.png']
+		default:
+		  break
+	  }
+}
+
 export function getWarpTheme(theme) {
     const themeYaml = YAML.stringify({
-        accent: theme.accent.color,
+        accent: theme.accent,
         background: theme.background.color,
         foreground: theme.foreground,
         details: theme.details,
@@ -44,7 +89,6 @@ export function getWarpTheme(theme) {
 }
 
 export function getiTerm2Theme(theme) {
-	console.log(theme)
     const foreground = hexRgb(theme.foreground)
     const background = hexRgb(theme.background.color ?? theme.background)
     const accent = hexRgb(theme.accent.color ?? theme.accent)

@@ -211,3 +211,84 @@ export const seaShellTheme = {
         }
     }
 };
+
+export const gruvboxDarkThemeData = {
+    imgSrc: '/FeaturedThemes/Gruvbox/GruvboxDark.png',
+    theme: {
+      data: {
+        username:"Jess Wang",
+        content: gruvboxDarkTheme,
+        name: 'Gruvbox Dark',
+      }
+    }
+  }
+
+
+export const linuxLaunchThemeData = {
+    imgSrc: '/FeaturedThemes/LinuxLaunch/LinuxLaunch.png',
+    theme: {
+      data: {
+        username:"The Warp Team",
+        content: linuxLaunchTheme,
+        name: 'Linux Launch',
+      }
+    }
+  }
+
+export const coolNightThemeData = {
+    imgSrc: '/FeaturedThemes/CoolNight/CoolNight.png',
+    theme: {
+      data: {
+        username:"Josean Martinez",
+        content: coolNightTheme,
+        name: 'Cool Night',
+      }
+    }
+  }
+
+export const seashellThemeData = {
+    imgSrc: '/FeaturedThemes/Seashell/Seashell.png',
+    theme: {
+      data: {
+        username:"Jess Wang",
+        content: seaShellTheme,
+        name: 'Seashell',
+      }
+    }
+  }
+
+export const cyberpinkThemeData =     {
+    imgSrc: '/FeaturedThemes/Cyberpink/Cyberpink.png',
+    theme: {
+      data: {
+        username:"Jess Wang",
+        backgroundImageSrc: '/PlainBackground/CyberPink.png',
+        content: cyberPinkTheme,
+        name: 'Cyberpink',
+      }
+    }
+  }
+
+export const retrowaveThemeData = {
+    imgSrc: '/FeaturedThemes/Retrowave/RetroWave.png',
+    theme: {
+      data: {
+        username: "Jess Wang",
+        backgroundImageSrc: '/PlainBackground/RetroWave.png',
+        content: retroWaveTheme,
+        name: 'Retrowave',
+      }
+    }
+  }
+
+export const draculaThemeData =     {
+    name: 'Dracula',
+    imgSrc: '/FeaturedThemes/Dracula/Dracula.png',
+    theme: {
+      data: {
+        username:"Jess Wang",
+        content: draculaTheme,
+        name: 'Dracula',
+      }
+    }
+  }

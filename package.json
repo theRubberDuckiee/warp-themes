@@ -28,8 +28,10 @@
 		"react-ga": "^3.3.1",
 		"react-hot-toast": "^2.3.0",
 		"react-popper": "^2.3.0",
+		"react-slick": "^0.30.2",
 		"rgb-hex": "^4.0.0",
-		"simple-xml-to-json": "^1.0.9"
+		"simple-xml-to-json": "^1.0.9",
+		"slick-carousel": "^1.8.1"
 	},
 	"devDependencies": {
 		"@types/node": "^18.0.6",
