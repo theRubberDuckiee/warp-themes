@@ -1,69 +1,17 @@
-import { coolNightTheme, cyberPinkTheme, draculaTheme, gruvboxDarkTheme, linuxLaunchTheme, retroWaveTheme, seaShellTheme } from "appConstants";
+import { coolNightTheme, coolNightThemeData, cyberPinkTheme, cyberpinkThemeData, draculaTheme, draculaThemeData, gruvboxDarkTheme, gruvboxDarkThemeData, linuxLaunchTheme, linuxLaunchThemeData, retroWaveTheme, retrowaveThemeData, seaShellTheme, seashellThemeData } from "appConstants";
 import ThemeCard from "./ThemeCard";
 import { FeaturedThemeData } from "interface";
 
 export default function FeaturedCommunityThemes() {
   const featuredThemes: FeaturedThemeData[] = [
-    {
-      imgSrc: '/FeaturedThemes/GruvboxDark.png',
-      themeData: {
-          content: gruvboxDarkTheme,
-          name: 'Gruvbox Dark',
-          username: 'Jess',
-      }
-    },
-    {
-      imgSrc: '/FeaturedThemes/LinuxLaunch.png',
-      themeData: {
-        content: linuxLaunchTheme,
-        name: 'Linux Launch',
-        username: 'Jess',
-      }
-    },
-    {
-      imgSrc: '/FeaturedThemes/CoolNight.png',
-      themeData: {
-        content: coolNightTheme,
-        name: 'Cool Night',
-        username: 'Jess',
-      }
-    },
-    {
-
-      imgSrc: '/FeaturedThemes/Seashell.png',
-      themeData: {
-        content: seaShellTheme,
-        name: 'Seashell',
-        username: 'Jess',
-      }
-    },
-    {
-      imgSrc: '/FeaturedThemes/Cyberpink.png',
-      themeData: {
-        backgroundImageSrc: '/PlainBackground/CyberPink.png',
-        content: cyberPinkTheme,
-        name: 'Cyberpink',
-        username: 'Jess',
-      }
-    },
-    {
-      imgSrc: '/FeaturedThemes/RetroWave.png',
-      themeData: {
-        content: retroWaveTheme,
-        backgroundImageSrc: '/PlainBackground/RetroWave.png',
-        name: 'Retrowave',
-        username: 'Jess',
-      }
-    },
-    {
-      imgSrc: '/FeaturedThemes/Dracula.png',
-      themeData: {
-        content: draculaTheme,
-        name: 'Dracula',
-        username: 'Jess',
-      }
-    },
-  ]
+    gruvboxDarkThemeData,
+    linuxLaunchThemeData,
+    coolNightThemeData,
+    seashellThemeData,
+    cyberpinkThemeData,
+    retrowaveThemeData,
+    draculaThemeData,
+  ];
 
   return (
     <div className='flex h-screen flex-col bg-slate-100 dark:bg-gray-900 overflow-y-hidden text-black dark:text-white'>
@@ -82,3 +30,4 @@ export default function FeaturedCommunityThemes() {
     </div>
   );
 }
+

@@ -33,7 +33,7 @@ export interface ThemeData {
     content: Theme,
     username: string,
     backgroundImageSrc?: string
-    tId: string
+    tId?: string
 }
 
 export interface FeaturedThemeData {

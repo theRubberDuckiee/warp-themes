@@ -1,3 +1,5 @@
+import { FeaturedThemeData } from "interface";
+
 export const gruvboxDarkTheme = {
     'accent': '#458588',
     'background': '#282828',
@@ -211,3 +213,70 @@ export const seaShellTheme = {
         }
     }
 };
+
+export const gruvboxDarkThemeData = {
+    imgSrc: '/FeaturedThemes/Gruvbox/GruvboxDark.png',
+    themeData: {
+        username:"Jess Wang",
+        content: gruvboxDarkTheme,
+        name: 'Gruvbox Dark',
+    }
+  }
+
+
+export const linuxLaunchThemeData = {
+    imgSrc: '/FeaturedThemes/LinuxLaunch/LinuxLaunch.png',
+    themeData: {
+        username:"The Warp Team",
+        content: linuxLaunchTheme,
+        name: 'Linux Launch',
+    }
+  }
+
+export const coolNightThemeData = {
+    imgSrc: '/FeaturedThemes/CoolNight/CoolNight.png',
+    themeData: {
+        username:"Josean Martinez",
+        content: coolNightTheme,
+        name: 'Cool Night',
+    }
+  }
+
+export const seashellThemeData: FeaturedThemeData = {
+    imgSrc: '/FeaturedThemes/Seashell/Seashell.png',
+    themeData: {
+      username:"Jess Wang",
+      content: seaShellTheme,
+      name: 'Seashell',
+    }
+  }
+
+export const cyberpinkThemeData =     {
+    imgSrc: '/FeaturedThemes/Cyberpink/Cyberpink.png',
+    themeData: {
+        username:"Jess Wang",
+        backgroundImageSrc: '/PlainBackground/CyberPink.png',
+        content: cyberPinkTheme,
+        name: 'Cyberpink',
+    }
+  }
+
+export const retrowaveThemeData = {
+    imgSrc: '/FeaturedThemes/Retrowave/RetroWave.png',
+    themeData: {
+        username: "Jess Wang",
+        backgroundImageSrc: '/PlainBackground/RetroWave.png',
+        content: retroWaveTheme,
+        name: 'Retrowave',
+    }
+  }
+
+export const draculaThemeData =     {
+    name: 'Dracula',
+    imgSrc: '/FeaturedThemes/Dracula/Dracula.png',
+    themeData: {
+        username:"Jess Wang",
+        content: draculaTheme,
+        name: 'Dracula',
+    }
+  }

@@ -7,20 +7,21 @@ import Link from 'next/link'; // Import Link from Next.js
 interface Props {
     theme: ThemeData,
     image?: string,
-    themeId: string,
 }
 
-function ThemeCard({theme, image, themeId}: Props) {
+function ThemeCard({theme, image}: Props) {
+    const url = theme.tId == undefined ? `/${encodeURIComponent(theme.name)}` : `/themes/${theme.tId}`
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="ThemeCardContainer flex justify-center">
             <div className="ThemeCard p-4 rounded transition duration-300 hover:shadow-lg hover:bg-white hover:bg-opacity-10"
                  style={{ minWidth:'600px', maxWidth: '900px', width: '100%' }}>
-                <h2 className="text-lg font-bold">
-                    <Link href={`/themes/${themeId}`}>
-                        <a>{theme.name}</a>
-                    </Link>
-                </h2>
+                <Link href={url}>
+                    <a>
+                        {theme.name}
+                    </a>
+                </Link>
+
                 <div className="py-4">
                     { image ?
                     <img src={image} className="w-full h-auto rounded-lg shadow-md"/> :
