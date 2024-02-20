@@ -1,6 +1,7 @@
 import ThemeCard from './ThemeCard';
 
 export default function AllCommunityThemes({setUploadedThemesCount, themes, loading}) {
+  console.log(themes[0].id)
   return (
     <div className='flex h-screen flex-col bg-slate-100 dark:bg-gray-900 overflow-y-hidden text-black dark:text-white'>
       <div className="overflow-y-auto">
@@ -11,7 +12,8 @@ export default function AllCommunityThemes({setUploadedThemesCount, themes, load
             themes.map((item, index) => (
               <div key={index} className="w-full">
                 <ThemeCard
-                  theme={item}
+                  theme={item.data}
+                  themeId = {item.id}
                 />
               </div>
             ))

@@ -2,7 +2,7 @@
 export interface Theme {
     foreground: string,
     background: string,
-    accent: string,
+    accent: string | {},
     details: string,
     terminal_colors: {
         bright: {
@@ -26,4 +26,17 @@ export interface Theme {
             yellow: string
         }
     }
+}
+
+export interface ThemeData {
+    name: string,
+    content: Theme,
+    username: string,
+    backgroundImageSrc?: string
+    tId: string
+}
+
+export interface FeaturedThemeData {
+    themeData: ThemeData,
+    imgSrc: string
 }

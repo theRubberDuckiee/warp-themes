@@ -13,8 +13,8 @@ export const logPageView = () => {
 
 export function getWarpTheme(theme) {
     const themeYaml = YAML.stringify({
-        accent: theme.accent.color,
-        background: theme.background.color,
+        accent: theme.accent,
+        background: theme.background,
         foreground: theme.foreground,
         details: theme.details,
         terminal_colors: {
@@ -44,10 +44,9 @@ export function getWarpTheme(theme) {
 }
 
 export function getiTerm2Theme(theme) {
-	console.log(theme)
     const foreground = hexRgb(theme.foreground)
-    const background = hexRgb(theme.background.color ?? theme.background)
-    const accent = hexRgb(theme.accent.color ?? theme.accent)
+    const background = hexRgb(theme.background ?? theme.background)
+    const accent = hexRgb(theme.accent ?? theme.accent)
     const ansiBlack = hexRgb(theme.terminal_colors.normal.black)
     const ansiBlue = hexRgb(theme.terminal_colors.normal.blue)
     const ansiBrightBlack = hexRgb(theme.terminal_colors.bright.black)

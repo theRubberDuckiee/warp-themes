@@ -18,7 +18,7 @@ function AppSidebar() {
 			<ThemeInput
 				themeValue={context.name}
 				themeOnChange={(n) => setContext({ ...context, name: n })}
-				detailsValue={context.details}
+				detailsValue={context.content.details}
 				detailsOnChange={(d) => setContext({ ...context, details: d })}
 				usernameValue={context.username}
 				usernameOnChange={(u) => setContext({ ...context, username: u })}
@@ -27,17 +27,17 @@ function AppSidebar() {
 			<div className='mb-4 flex flex-row space-x-6'>
 				<ColorInput
 					name='Accent'
-					color={context.accent.color}
-					setColor={(c) => setContext({ ...context, accent: { ...context.accent, color: c } })}
+					color={context.content.accent}
+					setColor={(c) => setContext({ ...context, accent: { ...context.content.accent, color: c } })}
 				/>
 				<ColorInput
 					name='Background'
-					color={context.background.color}
+					color={context.content.background}
 					setColor={(c) =>
 						setContext({
 							...context,
 							background: {
-								...context.background,
+								...context.content.background,
 								color: c,
 							},
 						})
@@ -45,7 +45,7 @@ function AppSidebar() {
 				/>
 				<ColorInput
 					name='Foreground'
-					color={context.foreground}
+					color={context.content.foreground}
 					setColor={(c) =>
 						setContext({
 							...context,
@@ -74,39 +74,39 @@ function AppSidebar() {
 						<div className='flex flex-row space-x-6'>
 							<ColorInput
 								name='Black'
-								color={context.terminal_colors.normal.black}
+								color={context.content.terminal_colors.normal.black}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											normal: { ...context.terminal_colors.normal, black: c },
+											...context.content.terminal_colors,
+											normal: { ...context.content.terminal_colors.normal, black: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Red'
-								color={context.terminal_colors.normal.red}
+								color={context.content.terminal_colors.normal.red}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											normal: { ...context.terminal_colors.normal, red: c },
+											...context.content.terminal_colors,
+											normal: { ...context.content.terminal_colors.normal, red: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Green'
-								color={context.terminal_colors.normal.green}
+								color={context.content.terminal_colors.normal.green}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											normal: { ...context.terminal_colors.normal, green: c },
+											...context.content.terminal_colors,
+											normal: { ...context.content.terminal_colors.normal, green: c },
 										},
 									})
 								}
@@ -115,39 +115,39 @@ function AppSidebar() {
 						<div className='flex flex-row space-x-6'>
 							<ColorInput
 								name='Yellow'
-								color={context.terminal_colors.normal.yellow}
+								color={context.content.terminal_colors.normal.yellow}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											normal: { ...context.terminal_colors.normal, yellow: c },
+											...context.content.terminal_colors,
+											normal: { ...context.content.terminal_colors.normal, yellow: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Blue'
-								color={context.terminal_colors.normal.blue}
+								color={context.content.terminal_colors.normal.blue}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											normal: { ...context.terminal_colors.normal, blue: c },
+											...context.content.terminal_colors,
+											normal: { ...context.content.terminal_colors.normal, blue: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Magenta'
-								color={context.terminal_colors.normal.magenta}
+								color={context.content.terminal_colors.normal.magenta}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											normal: { ...context.terminal_colors.normal, magenta: c },
+											...context.content.terminal_colors,
+											normal: { ...context.content.terminal_colors.normal, magenta: c },
 										},
 									})
 								}
@@ -156,26 +156,26 @@ function AppSidebar() {
 						<div className='flex flex-row space-x-6'>
 							<ColorInput
 								name='Cyan'
-								color={context.terminal_colors.normal.cyan}
+								color={context.content.terminal_colors.normal.cyan}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											normal: { ...context.terminal_colors.normal, cyan: c },
+											...context.content.terminal_colors,
+											normal: { ...context.content.terminal_colors.normal, cyan: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='White'
-								color={context.terminal_colors.normal.white}
+								color={context.content.terminal_colors.normal.white}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											normal: { ...context.terminal_colors.normal, white: c },
+											...context.content.terminal_colors,
+											normal: { ...context.content.terminal_colors.normal, white: c },
 										},
 									})
 								}
@@ -186,39 +186,39 @@ function AppSidebar() {
 						<div className='flex flex-row space-x-6'>
 							<ColorInput
 								name='Bright Black'
-								color={context.terminal_colors.bright.black}
+								color={context.content.terminal_colors.bright.black}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											bright: { ...context.terminal_colors.bright, black: c },
+											...context.content.terminal_colors,
+											bright: { ...context.content.terminal_colors.bright, black: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Bright Red'
-								color={context.terminal_colors.bright.red}
+								color={context.content.terminal_colors.bright.red}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											bright: { ...context.terminal_colors.bright, red: c },
+											...context.content.terminal_colors,
+											bright: { ...context.content.terminal_colors.bright, red: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Bright Green'
-								color={context.terminal_colors.bright.green}
+								color={context.content.terminal_colors.bright.green}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											bright: { ...context.terminal_colors.bright, green: c },
+											...context.content.terminal_colors,
+											bright: { ...context.content.terminal_colors.bright, green: c },
 										},
 									})
 								}
@@ -227,39 +227,39 @@ function AppSidebar() {
 						<div className='flex flex-row space-x-6'>
 							<ColorInput
 								name='Bright Yellow'
-								color={context.terminal_colors.bright.yellow}
+								color={context.content.terminal_colors.bright.yellow}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											bright: { ...context.terminal_colors.bright, yellow: c },
+											...context.content.terminal_colors,
+											bright: { ...context.content.terminal_colors.bright, yellow: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Bright Blue'
-								color={context.terminal_colors.bright.blue}
+								color={context.content.terminal_colors.bright.blue}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											bright: { ...context.terminal_colors.bright, blue: c },
+											...context.content.terminal_colors,
+											bright: { ...context.content.terminal_colors.bright, blue: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Bright Magenta'
-								color={context.terminal_colors.bright.magenta}
+								color={context.content.terminal_colors.bright.magenta}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											bright: { ...context.terminal_colors.bright, magenta: c },
+											...context.content.terminal_colors,
+											bright: { ...context.content.terminal_colors.bright, magenta: c },
 										},
 									})
 								}
@@ -268,26 +268,26 @@ function AppSidebar() {
 						<div className='flex flex-row space-x-6'>
 							<ColorInput
 								name='Bright Cyan'
-								color={context.terminal_colors.bright.cyan}
+								color={context.content.terminal_colors.bright.cyan}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											bright: { ...context.terminal_colors.bright, cyan: c },
+											...context.content.terminal_colors,
+											bright: { ...context.content.terminal_colors.bright, cyan: c },
 										},
 									})
 								}
 							/>
 							<ColorInput
 								name='Bright White'
-								color={context.terminal_colors.bright.white}
+								color={context.content.terminal_colors.bright.white}
 								setColor={(c) =>
 									setContext({
 										...context,
 										terminal_colors: {
-											...context.terminal_colors,
-											bright: { ...context.terminal_colors.bright, white: c },
+											...context.content.terminal_colors,
+											bright: { ...context.content.terminal_colors.bright, white: c },
 										},
 									})
 								}

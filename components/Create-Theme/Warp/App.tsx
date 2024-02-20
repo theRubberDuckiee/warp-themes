@@ -9,7 +9,7 @@ function WarpApp() {
 	return (
 		<div
 			className='h-fit min-w-fit select-none rounded-md leading-5 drop-shadow-lg lg:max-w-3xl'
-			style={{ backgroundColor: context.background.color, color: context.foreground }}
+			style={{ backgroundColor: context.content.background, color: context.content.foreground }}
 		>
 			<WarpAppNavbar />
 			<WarpAppCommand_Neofetch />

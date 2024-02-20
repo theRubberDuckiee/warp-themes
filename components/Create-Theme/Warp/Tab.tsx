@@ -12,7 +12,7 @@ function WarpAppNavbarTab(props: Props) {
 	return (
 		<div
 			className={`relative p-2 px-12 text-sm ${active ? 'border-b-4' : 'opacity-70'}`}
-			style={{ borderColor: context.accent.color }}
+			style={{ borderColor: context.content.accent }}
 		>
 			{title}
 		</div>

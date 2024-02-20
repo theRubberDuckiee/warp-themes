@@ -1,95 +1,69 @@
 import { coolNightTheme, cyberPinkTheme, draculaTheme, gruvboxDarkTheme, linuxLaunchTheme, retroWaveTheme, seaShellTheme } from "appConstants";
 import ThemeCard from "./ThemeCard";
-
-// Define the type of require to include context
-declare const require: {
-  context(url: string, recursive: boolean, pattern: RegExp): {
-    keys(): string[];
-    <T>(id: string): T;
-  };
-};
-
+import { FeaturedThemeData } from "interface";
 
 export default function FeaturedCommunityThemes() {
-  const featuredThemes = [
+  const featuredThemes: FeaturedThemeData[] = [
     {
       imgSrc: '/FeaturedThemes/GruvboxDark.png',
-      theme: {
-        data: {
+      themeData: {
           content: gruvboxDarkTheme,
           name: 'Gruvbox Dark',
-        }
+          username: 'Jess',
       }
     },
     {
       imgSrc: '/FeaturedThemes/LinuxLaunch.png',
-      theme: {
-        data: {
-          content: linuxLaunchTheme,
-          name: 'Linux Launch',
-        }
+      themeData: {
+        content: linuxLaunchTheme,
+        name: 'Linux Launch',
+        username: 'Jess',
       }
     },
     {
       imgSrc: '/FeaturedThemes/CoolNight.png',
-      theme: {
-        data: {
-          content: coolNightTheme,
-          name: 'Cool Night',
-        }
+      themeData: {
+        content: coolNightTheme,
+        name: 'Cool Night',
+        username: 'Jess',
       }
     },
     {
 
       imgSrc: '/FeaturedThemes/Seashell.png',
-      theme: {
-        data: {
-          content: seaShellTheme,
-          name: 'Seashell',
-        }
+      themeData: {
+        content: seaShellTheme,
+        name: 'Seashell',
+        username: 'Jess',
       }
     },
     {
       imgSrc: '/FeaturedThemes/Cyberpink.png',
-      theme: {
-        data: {
-          backgroundImageSrc: '/PlainBackground/CyberPink.png',
-          content: cyberPinkTheme,
-          name: 'Cyberpink',
-        }
+      themeData: {
+        backgroundImageSrc: '/PlainBackground/CyberPink.png',
+        content: cyberPinkTheme,
+        name: 'Cyberpink',
+        username: 'Jess',
       }
     },
     {
       imgSrc: '/FeaturedThemes/RetroWave.png',
-      theme: {
-        data: {
-          backgroundImageSrc: '/PlainBackground/RetroWave.png',
-          content: retroWaveTheme,
-          name: 'Retrowave',
-        }
+      themeData: {
+        content: retroWaveTheme,
+        backgroundImageSrc: '/PlainBackground/RetroWave.png',
+        name: 'Retrowave',
+        username: 'Jess',
       }
     },
     {
-      name: 'Dracula',
       imgSrc: '/FeaturedThemes/Dracula.png',
-      theme: {
-        data: {
-          content: draculaTheme,
-          name: 'Dracula',
-        }
+      themeData: {
+        content: draculaTheme,
+        name: 'Dracula',
+        username: 'Jess',
       }
     },
   ]
-  // const importAll = (r) => r.keys().map(r);
-  // const images = importAll(require.context('./FeaturedThemes', false, /\.(png|jpe?g|svg)$/));
-
-  
-  // // Prepare the list of featured themes with image sources
-  // const featuredThemes = images.map((imgSrc, index) => ({
-  //   name: `Theme ${index + 1}`,
-  //   imgSrc: imgSrc.default, // Assuming default export of images
-  // }));
-
 
   return (
     <div className='flex h-screen flex-col bg-slate-100 dark:bg-gray-900 overflow-y-hidden text-black dark:text-white'>
@@ -99,7 +73,7 @@ export default function FeaturedCommunityThemes() {
               <div key={index} className="w-full">
                 <ThemeCard
                   image={item.imgSrc}
-                  theme={item.theme}
+                  theme={item.themeData}
                 />
               </div>
             ))}

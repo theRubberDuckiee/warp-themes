@@ -26,14 +26,13 @@ export function DownloadTheme({isOpen, setIsOpen, theme, imgSrc, themeName}: Pro
     
     
     function downloadTheme(terminalType: TerminalType) {
-        console.log(theme)
-        const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.data.content) : getiTerm2Theme(theme.data.content);
+        const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
         const applicationType = terminalType === TerminalType.Warp ? 'application/yaml' : 'application/itermcolors';
         const extension = terminalType === TerminalType.Warp ? 'yaml' : 'itermcolors';
         const objectURL = window.URL.createObjectURL(new Blob([themeYaml], { type: applicationType }));
         const downloadLink = document.createElement('a');
         downloadLink.href = objectURL;
-        downloadLink.download = `${theme.data.name}.${extension}`;
+        downloadLink.download = `${theme.name}.${extension}`;
         document.body.appendChild(downloadLink);
         downloadLink.click();
         downloadLink.remove();

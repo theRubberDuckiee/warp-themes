@@ -12,7 +12,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     ga.initGA();
     ga.logPageView();
-    console.log('ga', ga);
     router.events.on('routeChangeComplete', ga.logPageView);
     return () => {
       router.events.off('routeChangeComplete', ga.logPageView);

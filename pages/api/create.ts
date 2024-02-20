@@ -50,7 +50,7 @@ async function handler(request: NextApiRequest, response: NextApiResponse) {
 	try {
 		const docRef = await addDoc(themesCollectionRef, {
 			name: request.body.name,
-			content: request.body.content,
+			theme: request.body.content,
 			username: request.body.username,
 		});
 		responseObj.status = 200;

@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import ThemePreview from './ThemePreview';
 import { DownloadTheme } from '@components/Community-Themes/DownloadTheme';
+import { ThemeData } from 'interface';
+import Link from 'next/link'; // Import Link from Next.js
 
 interface Props {
-    theme: any,
+    theme: ThemeData,
     image?: string,
+    themeId: string,
 }
 
-function ThemeCard({theme, image}: Props) {
+function ThemeCard({theme, image, themeId}: Props) {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="ThemeCardContainer flex justify-center">
             <div className="ThemeCard p-4 rounded transition duration-300 hover:shadow-lg hover:bg-white hover:bg-opacity-10"
                  style={{ minWidth:'600px', maxWidth: '900px', width: '100%' }}>
                 <h2 className="text-lg font-bold">
-                    {theme.data.name}
+                    <Link href={`/themes/${themeId}`}>
+                        <a>{theme.name}</a>
+                    </Link>
                 </h2>
                 <div className="py-4">
                     { image ?
@@ -25,14 +30,20 @@ function ThemeCard({theme, image}: Props) {
                 <div className="flex justify-between items-center py-4">
                     <div>
                         <span className="mr-4">
-                            Created by: {theme.data.username}
+                            Created by: {theme.username}
                         </span>
                     </div>
                     <button onClick={() => {setIsOpen(true)}} className="btn btn-primary px-4 py-2">
                         Download Theme
                     </button>
                 </div>
-                {theme && <DownloadTheme isOpen={isOpen} setIsOpen={setIsOpen} theme={theme} themeName={theme.name}/>}
+                {theme && <DownloadTheme
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                    theme={theme}
+                    themeName={theme.name}
+                />
+                }
             </div>
         </div>
     );

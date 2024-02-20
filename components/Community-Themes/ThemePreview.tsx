@@ -11,8 +11,8 @@ export default function ThemePreview(props) {
             <div
                 className="absolute top-0 left-0 right-0 bottom-0 min-w-full select-none rounded-md leading-5 drop-shadow-lg lg:max-w-3xl"
                 style={{
-                    backgroundColor: theme.data.content.background,
-                    color: theme.data.content.foreground,
+                    backgroundColor: theme.content.background,
+                    color: theme.content.foreground,
                 }}
             >
                 <SimplifiedNavBar theme={theme} />

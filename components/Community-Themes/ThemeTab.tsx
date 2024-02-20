@@ -9,7 +9,7 @@ function ThemeTab({title, theme}) {
 	return (
 		<div
 			className={`relative p-2 px-12 text-sm border-b-2`}
-			style={{ borderColor: theme.data.content.accent }}
+			style={{ borderColor: theme.content.accent }}
 		>
 			{title}
 		</div>

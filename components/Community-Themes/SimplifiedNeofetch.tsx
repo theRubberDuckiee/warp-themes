@@ -5,7 +5,7 @@ function SimplifiedNeofetch({theme}) {
 		<WarpAppBlock command='neofetch' execution_time='0.016s'>
 			<div className='flex flex-row items-center'>
 				<pre className='mr-12'>
-					<span style={{ color: theme.data.content.terminal_colors.normal.green }}>
+					<span style={{ color: theme.content.terminal_colors.normal.green }}>
 						&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&apos;c.
 						<br />
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;,xNMM.
@@ -18,13 +18,13 @@ function SimplifiedNeofetch({theme}) {
 						<br />
 						&emsp;&emsp;cKMMMMMMMMMMNWMMMMMMMMMM0:
 					</span>
-					<span style={{ color: theme.data.content.terminal_colors.normal.yellow }}>
+					<span style={{ color: theme.content.terminal_colors.normal.yellow }}>
 						<br />
 						&emsp;.KMMMMMMMMMMMMMMMMMMMMMMMWd.
 						<br />
 						&emsp;XMMMMMMMMMMMMMMMMMMMMMMMX.
 					</span>
-					<span style={{ color: theme.data.content.terminal_colors.normal.red }}>
+					<span style={{ color: theme.content.terminal_colors.normal.red }}>
 						<br />
 						;MMMMMMMMMMMMMMMMMMMMMMMM:
 						<br />
@@ -34,13 +34,13 @@ function SimplifiedNeofetch({theme}) {
 						<br />
 						&emsp;kMMMMMMMMMMMMMMMMMMMMMMMWd.
 					</span>
-					<span style={{ color: theme.data.content.terminal_colors.normal.magenta }}>
+					<span style={{ color: theme.content.terminal_colors.normal.magenta }}>
 						<br />
 						&nbsp;.XMMMMMMMMMMMMMMMMMMMMMMMMk
 						<br />
 						&nbsp;&nbsp;.XMMMMMMMMMMMMMMMMMMMMMMK.
 					</span>
-					<span style={{ color: theme.data.content.terminal_colors.normal.blue }}>
+					<span style={{ color: theme.content.terminal_colors.normal.blue }}>
 						<br />
 						&emsp;&emsp;&emsp;kMMMMMMMMMMMMMMMMMMMMd
 						<br />
@@ -51,39 +51,39 @@ function SimplifiedNeofetch({theme}) {
 				</pre>
 				<div>
 					<p>
-						<b style={{ color: theme.data.content.terminal_colors.normal.green }}>root</b>@
-						<b style={{ color: theme.data.content.terminal_colors.normal.green }}>warp-themes</b>
+						<b style={{ color: theme.content.terminal_colors.normal.green }}>root</b>@
+						<b style={{ color: theme.content.terminal_colors.normal.green }}>warp-themes</b>
 					</p>
 					<p>--------------------</p>
 					<p>
-						<b style={{ color: theme.data.content.terminal_colors.normal.yellow }}>Host</b>: warp-themes.com
+						<b style={{ color: theme.content.terminal_colors.normal.yellow }}>Host</b>: warp-themes.com
 					</p>
 					<p>
-						<b style={{ color: theme.data.content.terminal_colors.normal.yellow }}>Uptime</b>: 12 hours, 8
+						<b style={{ color: theme.content.terminal_colors.normal.yellow }}>Uptime</b>: 12 hours, 8
 						mins&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 					</p>
 					<p>
-						<b style={{ color: theme.data.content.terminal_colors.normal.yellow }}>Shell</b>: zsh
+						<b style={{ color: theme.content.terminal_colors.normal.yellow }}>Shell</b>: zsh
 					</p>
 					<p>
-						<b style={{ color: theme.data.content.terminal_colors.normal.yellow }}>Terminal</b>: WarpTerminal
+						<b style={{ color: theme.content.terminal_colors.normal.yellow }}>Terminal</b>: WarpTerminal
 					</p>
 					<br />
 					<div className='flex flex-row'>
-						{Object.keys(theme.data.content.terminal_colors.normal).map((color) => (
+						{Object.keys(theme.content.terminal_colors.normal).map((color) => (
 							<div
 								key={`normal-${color}`}
 								className='h-1 w-1 p-3'
-								style={{ backgroundColor: theme.data.content.terminal_colors.normal[color] }}
+								style={{ backgroundColor: theme.content.terminal_colors.normal[color] }}
 							></div>
 						))}
 					</div>
 					<div className='flex flex-row'>
-						{Object.keys(theme.data.content.terminal_colors.bright).map((color) => (
+						{Object.keys(theme.content.terminal_colors.bright).map((color) => (
 							<div
 								key={`bright-${color}`}
 								className='h-1 w-1 p-3'
-								style={{ backgroundColor: theme.data.content.terminal_colors.bright[color] }}
+								style={{ backgroundColor: theme.content.terminal_colors.bright[color] }}
 							></div>
 						))}
 					</div>
