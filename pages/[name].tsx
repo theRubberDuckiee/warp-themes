@@ -11,13 +11,9 @@ const ThemePage = () => {
   const themeName = router.query.name as string;
   const theme = getWarpThemeByName(themeName)
   const img = getWarpImgByName(themeName)
-  console.log("img", img)
-  const fakeTheme = {
-    content: theme
-  }
 
   return (
-	<ThemeWithBackground name={themeName} img={img} themeData={fakeTheme}/>
+	<ThemeWithBackground name={themeName} img={img} themeData={theme}/>
   );
 }
 

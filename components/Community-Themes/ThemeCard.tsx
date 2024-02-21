@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import ThemePreview from './ThemePreview';
 import { DownloadTheme } from '@components/Community-Themes/DownloadTheme';
-import { ThemeData } from 'interface';
+import { FeaturedThemeData, ThemeData } from 'interface';
 import Link from 'next/link'; // Import Link from Next.js
 
 interface Props {
-    theme: ThemeData,
-    image?: string,
+    theme: ThemeData
+    imgSrc?: string
 }
 
-function ThemeCard({theme, image}: Props) {
+function ThemeCard({imgSrc, theme}: Props) {
     const url = theme.tId == undefined ? `/${encodeURIComponent(theme.name)}` : `/themes/${theme.tId}`
     const [isOpen, setIsOpen] = useState(false);
     return (
@@ -23,8 +23,8 @@ function ThemeCard({theme, image}: Props) {
                 </Link>
 
                 <div className="py-4">
-                    { image ?
-                    <img src={image} className="w-full h-auto rounded-lg shadow-md"/> :
+                    { imgSrc ?
+                    <img src={imgSrc} className="w-full h-auto rounded-lg shadow-md"/> :
                     <ThemePreview theme={theme}/>
                     }
                 </div>
@@ -42,7 +42,6 @@ function ThemeCard({theme, image}: Props) {
                     isOpen={isOpen}
                     setIsOpen={setIsOpen}
                     theme={theme}
-                    themeName={theme.name}
                 />
                 }
             </div>

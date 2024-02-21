@@ -6,9 +6,6 @@ import { useState } from 'react';
 
 function ThemeLandingPage({ themeData }) {
     const [isOpen, setIsOpen] = useState(false);
-    const fakeTheme = {
-        data: themeData
-    };
 
     return (
         <div className="bg-gray-900 text-white min-h-screen flex justify-center items-center">
@@ -19,7 +16,7 @@ function ThemeLandingPage({ themeData }) {
                     <div className="mt-4">
                         <div className="overflow-hidden">
                             <div className="flex gap-4">
-                                <ThemePreview theme={fakeTheme} />
+                                <ThemePreview theme={themeData} />
                             </div>
                         </div>
                     </div>
@@ -28,7 +25,7 @@ function ThemeLandingPage({ themeData }) {
                         <button onClick={() => { setIsOpen(true) }} className="btn btn-primary px-4 py-2">
                             Download Theme
                         </button>
-                        <DownloadTheme isOpen={isOpen} setIsOpen={setIsOpen} theme={fakeTheme} themeName={themeData.name} />
+                        <DownloadTheme isOpen={isOpen} setIsOpen={setIsOpen} theme={themeData} />
                     </div>
                 </div>
             )}

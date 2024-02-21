@@ -5,6 +5,7 @@ import { useAppContext } from '@lib/AppContext';
 import { Dispatch, SetStateAction, useState} from 'react';
 import YAML from 'json-to-pretty-yaml';
 import { getWarpTheme, getiTerm2Theme } from 'utils';
+import { ThemeData } from 'interface';
 
 enum TerminalType {
     Warp = 'Warp',
@@ -22,8 +23,8 @@ export function DownloadDialog({isOpen, setIsOpen, tId}: Props) {
     
     
     function downloadTheme(terminalType: TerminalType) {
-        const theme = context;
-        const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme) : getiTerm2Theme(theme);
+        const theme: ThemeData = context;
+        const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
         const applicationType = terminalType === TerminalType.Warp ? 'application/yaml' : 'application/itermcolors';
         const extension = terminalType === TerminalType.Warp ? 'yaml' : 'itermcolors';
         const objectURL = window.URL.createObjectURL(new Blob([themeYaml], { type: applicationType }));

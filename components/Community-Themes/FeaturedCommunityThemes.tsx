@@ -20,8 +20,8 @@ export default function FeaturedCommunityThemes() {
             {featuredThemes.map((item, index) => (
               <div key={index} className="w-full">
                 <ThemeCard
-                  image={item.imgSrc}
                   theme={item.themeData}
+                  imgSrc={item.imgSrc}
                 />
               </div>
             ))}

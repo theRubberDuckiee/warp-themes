@@ -1,12 +1,11 @@
-import WarpAppNavbarSystemButtons from '@components/Create-Theme/Warp/Navbar/SystemButton';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog } from '@headlessui/react';
 import DownloadIcon from '@heroicons/react/outline/DownloadIcon';
-import { useAppContext } from '@lib/AppContext';
+import { Theme, ThemeData } from 'interface';
 import { Dispatch, SetStateAction, useState } from 'react';
-import YAML from 'json-to-pretty-yaml';
+import { getWarpImgByName, getWarpTheme, getiTerm2Theme } from 'utils';
 import JSZip from 'jszip';
-import { getWarpTheme, getiTerm2Theme } from 'utils';
-import { Theme } from 'interface';
+import fs from 'fs';
+import path from 'path';
 
 enum TerminalType {
     Warp = 'Warp',
@@ -16,27 +15,52 @@ enum TerminalType {
 interface Props {
     isOpen: boolean,
     setIsOpen: Dispatch<SetStateAction<boolean>>,
-    theme: any
-    imgSrc?: string
-    themeName: string
+    theme: ThemeData
 }
 
-export function DownloadTheme({ isOpen, setIsOpen, theme, imgSrc, themeName }: Props) {
+export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
     const [terminal, setTerminal] = useState(TerminalType.Warp)
 
-    function downloadTheme(terminalType: TerminalType) {
-        const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.data.content) : getiTerm2Theme(theme.data.content);
-        const applicationType = terminalType === TerminalType.Warp ? 'application/yaml' : 'application/itermcolors';
+    async function downloadTheme(terminalType: TerminalType, theme: ThemeData) {
+        const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
         const extension = terminalType === TerminalType.Warp ? 'yaml' : 'itermcolors';
-        const objectURL = window.URL.createObjectURL(new Blob([themeYaml], { type: applicationType }));
-        const downloadLink = document.createElement('a');
-        downloadLink.href = objectURL;
-        downloadLink.download = `${theme.name}.${extension}`;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        downloadLink.remove();
-        window.URL.revokeObjectURL(objectURL);
+    
+        const yamlBlob = new Blob([themeYaml], { type: `application/${extension}` });
+    
+        try {
+            // Create download link for the YAML file
+            const yamlObjectURL = window.URL.createObjectURL(yamlBlob);
+            const yamlDownloadLink = document.createElement('a');
+            yamlDownloadLink.href = yamlObjectURL;
+            yamlDownloadLink.download = `${theme.name}.yaml`;
+            document.body.appendChild(yamlDownloadLink);
+    
+            // Trigger download for the YAML file
+            yamlDownloadLink.click();
+    
+            // Clean up
+            yamlDownloadLink.remove();
+            window.URL.revokeObjectURL(yamlObjectURL);
+    
+            if (theme.backgroundImageSrc) {
+                // Create download link for the PNG file
+                const pngDownloadLink = document.createElement('a');
+                pngDownloadLink.href = theme.backgroundImageSrc;
+                pngDownloadLink.download = `${theme.name}.png`;
+                document.body.appendChild(pngDownloadLink);
+        
+                // Trigger download for the PNG file
+                pngDownloadLink.click();
+        
+                // Clean up
+                pngDownloadLink.remove();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error, e.g., show an error message to the user
+        }
     }
+    
 
     return (
 
@@ -103,7 +127,7 @@ export function DownloadTheme({ isOpen, setIsOpen, theme, imgSrc, themeName }: P
                             </div>
                         </div>
                         <button
-                            onClick={() => { downloadTheme(terminal) }}
+                            onClick={() => { downloadTheme(terminal, theme) }}
                             className='btn mt-2 w-full btn-ghost flex items-center gap-2'
                         >
                             <DownloadIcon className='w-6 h-6' />

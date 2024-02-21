@@ -5,6 +5,7 @@ import FeaturedCommunityThemes from './FeaturedCommunityThemes';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from 'pages/api/create';
 import * as ga from '../../utils';
+import { ThemeData } from 'interface';
 
 export default function LandingPage() {
   const [view, setView] = useState<'featured' | 'all'>('featured');
@@ -20,20 +21,21 @@ export default function LandingPage() {
         const querySnapshot = await getDocs(themesCollectionRef);
 
         if (querySnapshot.size !== 0) {
-          const themesData = [];
+          const themesData: ThemeData[] = [];
           querySnapshot.forEach((doc) => {
+            const data = doc.data()
             themesData.push({
-              id: doc.id,
-              data: doc.data(),
+              tId: doc.id,
+              username: data.username,
+              content: data.content,
+              name: data.name
             });
           });
           setThemes(themesData)
           setUploadedThemesCount(themesData.length)
         }
       } catch (error) {
-        console.error('Error fetching themes:', error);
       } finally {
-        console.log('fetchData completed');
         setLoading(false);
       }
     }

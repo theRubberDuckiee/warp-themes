@@ -121,7 +121,7 @@ export const linuxLaunchTheme = {
     'accent': '#96ce45',
     'foreground': '#ffffff',
     'background_image': {
-        'path': 'LinuxLaunch_Hero_5.jpg',
+        'path': 'LinuxLaunch.png',
         'opacity': 30
     },
     'details': 'darker',
@@ -214,7 +214,7 @@ export const seaShellTheme = {
     }
 };
 
-export const gruvboxDarkThemeData = {
+export const gruvboxDarkThemeData: FeaturedThemeData = {
     imgSrc: '/FeaturedThemes/Gruvbox/GruvboxDark.png',
     themeData: {
         username:"Jess Wang",
@@ -224,16 +224,17 @@ export const gruvboxDarkThemeData = {
   }
 
 
-export const linuxLaunchThemeData = {
+export const linuxLaunchThemeData: FeaturedThemeData = {
     imgSrc: '/FeaturedThemes/LinuxLaunch/LinuxLaunch.png',
     themeData: {
         username:"The Warp Team",
         content: linuxLaunchTheme,
         name: 'Linux Launch',
+        backgroundImageSrc: '/PlainBackground/LinuxLaunch.png'
     }
   }
 
-export const coolNightThemeData = {
+export const coolNightThemeData: FeaturedThemeData = {
     imgSrc: '/FeaturedThemes/CoolNight/CoolNight.png',
     themeData: {
         username:"Josean Martinez",
@@ -251,7 +252,7 @@ export const seashellThemeData: FeaturedThemeData = {
     }
   }
 
-export const cyberpinkThemeData =     {
+export const cyberpinkThemeData: FeaturedThemeData =     {
     imgSrc: '/FeaturedThemes/Cyberpink/Cyberpink.png',
     themeData: {
         username:"Jess Wang",
@@ -261,7 +262,7 @@ export const cyberpinkThemeData =     {
     }
   }
 
-export const retrowaveThemeData = {
+export const retrowaveThemeData: FeaturedThemeData = {
     imgSrc: '/FeaturedThemes/Retrowave/RetroWave.png',
     themeData: {
         username: "Jess Wang",
@@ -271,8 +272,7 @@ export const retrowaveThemeData = {
     }
   }
 
-export const draculaThemeData =     {
-    name: 'Dracula',
+export const draculaThemeData: FeaturedThemeData = {
     imgSrc: '/FeaturedThemes/Dracula/Dracula.png',
     themeData: {
         username:"Jess Wang",
