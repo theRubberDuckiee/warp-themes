@@ -45,7 +45,7 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
         return (
             <div
                 className={className + " text-white"}
-                style={{ ...style, display: "block", background: "transparent", right: "20px", zIndex: "1" }}
+                style={{ ...style, display: "block", background: "transparent", zIndex: "1" }} // Adjusted right position
                 onClick={onClick}
             >
                 <i className="fas fa-chevron-right fa-3x"></i>
@@ -58,7 +58,7 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
         return (
             <div
                 className={className + " text-white"}
-                style={{ ...style, display: "block", background: "transparent", left: "20px", zIndex: "1" }}
+                style={{ ...style, display: "block", background: "transparent", zIndex: "1" }} // Adjusted left position
                 onClick={onClick}
             >
                 <i className="fas fa-chevron-left fa-3x"></i>
@@ -74,18 +74,18 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
             <div className="bg-gray-900 text-white min-h-screen flex justify-center items-center">
                 {themeData && (
                     <div className="max-w-screen-xl mx-auto p-8 rounded-lg w-full lg:w-3/4 xl:w-2/3">
-                        <h1 className="text-7xl font-bold mb-6 mt-54 text-center">{name}</h1>
+                        <h1 className="text-7xl font-bold mb-4 mt-36 text-center">{name}</h1>
                         <p className="text-2xl mb-12 text-center">Created by: {themeData.themeData.username}</p>
-                        <div className="mt-4">
-                            <Slider {...settings}>
-                                {img.map((image, index) => (
-                                    <div key={index}>
-                                        <img src={image} className="w-full h-auto rounded-lg" style={{ margin: 0 }} />
-                                    </div>
-                                ))}
-                            </Slider>
-                        </div>
-                        <div className="mt-16 flex justify-center">
+                        <div className="mt-0">
+    <Slider {...settings}>
+        {img.map((image, index) => (
+            <div key={index}>
+                <img src={image} className="w-3/4 h-auto rounded-lg mx-auto" style={{ margin: '0 auto' }} /> {/* Adjust width here */}
+            </div>
+        ))}
+    </Slider>
+</div>
+                        <div className="mt-12 flex justify-center">
                             <div>
                                 <button onClick={() => setIsOpen(true)} className="btn btn-primary px-4 py-2 text-2xl">
                                     Download Theme
