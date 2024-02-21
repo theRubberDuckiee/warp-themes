@@ -110,14 +110,10 @@ export function getWarpImgByName(name) {
 }
 
 export function getWarpTheme(theme: Theme) {
-    const themeYaml = YAML.stringify({
+    const yamlData = {
         accent: theme.accent,
         background: theme.background?.color ?? theme.background,
         foreground: theme.foreground,
-		background_image: {
-			path: theme.background_image.path,
-			opacity: theme.background_image.opacity,
-		},
         details: theme.details,
         terminal_colors: {
             normal: {
@@ -141,8 +137,18 @@ export function getWarpTheme(theme: Theme) {
                 white: theme.terminal_colors.bright.white,
             },
         },
-    });
-    return themeYaml
+    };
+
+    // Check if theme.background_image exists
+    if (theme.background_image) {
+        yamlData['background_image'] = {
+            path: theme.background_image.path,
+            opacity: theme.background_image.opacity,
+        };
+    }
+
+    const themeYaml = YAML.stringify(yamlData);
+    return themeYaml;
 }
 
 export function getiTerm2Theme(theme) {

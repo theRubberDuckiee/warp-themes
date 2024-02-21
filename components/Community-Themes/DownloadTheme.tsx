@@ -89,11 +89,19 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
                                     Place the theme file into{' '}
                                     <code className='text-sm bg-black text-white px-2 rounded'>~/.warp/themes/ </code>
                                     So for example, after downloading the files, you can run something like: 
+                                    {theme.content.background_image ? (
                                     <pre>
-                                    <code className='text-sm bg-black text-white px-2 rounded'>
-                                        mv /Users/jess/Downloads/{theme.content.background_image.path} /Users/jess/Downloads/{themeName}.yaml ~/.warp/themes
-                                    </code>
+                                        <code className='text-sm bg-black text-white px-2 rounded'>
+                                            mv /Users/jess/Downloads/{theme.content.background_image.path} /Users/jess/Downloads/{themeName}.yaml ~/.warp/themes
+                                        </code>
+                                    </pre> 
+                                ) : (
+                                    <pre>
+                                        <code className='text-sm bg-black text-white px-2 rounded'>
+                                            mv /Users/jess/Downloads/{themeName}.yaml ~/.warp/themes
+                                        </code>
                                     </pre>
+                                )}
                                 </li>
                                 <li>
                                     Open the Command Palette (<kbd className='kbd kbd-sm'>⌘</kbd> +{' '}
