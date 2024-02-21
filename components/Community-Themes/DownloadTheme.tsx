@@ -28,6 +28,7 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
     const [os, setOs] = useState(OperatingSystem.Linux)
     const themeName = theme.name.replace(/\s/g, "")
     const themePath = os == OperatingSystem.Mac ? '~/.warp/themes/' : '~/.local/share/warp-terminal/themes/'
+    const fileWord = theme.backgroundImageSrc ? 'themes' : 'theme'
 
     async function downloadTheme(terminalType: TerminalType, theme: ThemeData) {
         const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
@@ -91,7 +92,7 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
                                 <li>Enjoy your new theme ✨</li>
                             </ol> :
                             <ol className='list-decimal ml-4'>
-                                <li>Download the file</li>
+                                <li>Download the {fileWord}</li>
                                 {theme.content.background_image ? (
                                 <li>
                                 <li className="flex items-center">

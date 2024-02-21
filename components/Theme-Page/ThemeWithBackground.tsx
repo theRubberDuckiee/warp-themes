@@ -74,7 +74,7 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
             <div className="bg-gray-900 text-white min-h-screen flex justify-center items-center">
                 {themeData && (
                     <div className="max-w-screen-xl mx-auto p-8 rounded-lg w-full lg:w-3/4 xl:w-2/3">
-                        <h1 className="text-7xl font-bold mb-6 text-center">{name}</h1>
+                        <h1 className="text-7xl font-bold mb-6 mt-54 text-center">{name}</h1>
                         <p className="text-2xl mb-12 text-center">Created by: {themeData.themeData.username}</p>
                         <div className="mt-4">
                             <Slider {...settings}>
