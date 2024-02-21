@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FeaturedThemeData } from 'interface';
+import AppNavbar from '@components/Shared/Navbar/Navbar';
 
 interface Props {
     img: string                                        
@@ -24,6 +25,8 @@ function ThemeWithBackground({ img, themeData, name }) {
     };
 
     return (
+        <div className='flex h-screen flex-col bg-slate-100 sm:bg-white overflow-y-hidden'>
+        <div className='w-full border-b z-20 hidden sm:block'><AppNavbar /></div>
         <div className="bg-gray-900 text-white min-h-screen flex justify-center items-center">
             {themeData && (
                 <div className="max-w-screen-xl mx-auto p-8 rounded-lg w-full lg:w-3/4 xl:w-2/3">
@@ -50,6 +53,7 @@ function ThemeWithBackground({ img, themeData, name }) {
                 </div>
             )}
         </div>
+    </div>
     );
 }
 
