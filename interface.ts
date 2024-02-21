@@ -1,7 +1,11 @@
 // Define the interface
 export interface Theme {
     foreground: string,
-    background: string,
+    background: any,
+    background_image?: {
+        path: string,
+        opacity: number,
+    }
     accent: string | {},
     details: string,
     terminal_colors: {

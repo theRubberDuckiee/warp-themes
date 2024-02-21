@@ -20,6 +20,7 @@ interface Props {
 
 export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
     const [terminal, setTerminal] = useState(TerminalType.Warp)
+    const themeName = theme.name.replace(/\s/g, "")
 
     async function downloadTheme(terminalType: TerminalType, theme: ThemeData) {
         const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
@@ -32,7 +33,7 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
             const yamlObjectURL = window.URL.createObjectURL(yamlBlob);
             const yamlDownloadLink = document.createElement('a');
             yamlDownloadLink.href = yamlObjectURL;
-            yamlDownloadLink.download = `${theme.name}.yaml`;
+            yamlDownloadLink.download = `${themeName}.yaml`;
             document.body.appendChild(yamlDownloadLink);
     
             // Trigger download for the YAML file
@@ -46,7 +47,7 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
                 // Create download link for the PNG file
                 const pngDownloadLink = document.createElement('a');
                 pngDownloadLink.href = theme.backgroundImageSrc;
-                pngDownloadLink.download = `${theme.name}.png`;
+                pngDownloadLink.download = `${theme.content.background_image.path}`;
                 document.body.appendChild(pngDownloadLink);
         
                 // Trigger download for the PNG file
@@ -86,12 +87,17 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
                                 <li>Download the file</li>
                                 <li>
                                     Place the theme file into{' '}
-                                    <code className='text-sm bg-black text-white px-2 rounded'>~/.warp/themes/</code>
+                                    <code className='text-sm bg-black text-white px-2 rounded'>~/.warp/themes/ </code>
+                                    So for example, after downloading the files, you can run something like: 
+                                    <pre>
+                                    <code className='text-sm bg-black text-white px-2 rounded'>
+                                        mv /Users/jess/Downloads/{theme.content.background_image.path} /Users/jess/Downloads/{themeName}.yaml ~/.warp/themes
+                                    </code>
+                                    </pre>
                                 </li>
-                                <li>Restart Warp</li>
                                 <li>
                                     Open the Command Palette (<kbd className='kbd kbd-sm'>⌘</kbd> +{' '}
-                                    <kbd className='kbd kbd-sm'>P</kbd>) and search for <i>Open Theme Picker</i>
+                                    <kbd className='kbd kbd-sm'>P</kbd>) and search for <i>Open Theme Picker.</i>
                                 </li>
                                 <li>Enjoy your new theme ✨</li>
                             </ol>

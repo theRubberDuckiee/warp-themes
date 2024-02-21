@@ -2,6 +2,7 @@ import YAML from 'json-to-pretty-yaml';
 import hexRgb from 'hex-rgb';
 import ReactGA from 'react-ga';
 import { coolNightTheme, coolNightThemeData, cyberPinkTheme, cyberpinkThemeData, draculaTheme, draculaThemeData, gruvboxDarkTheme, gruvboxDarkThemeData, linuxLaunchTheme, linuxLaunchThemeData, retroWaveTheme, retrowaveThemeData, seaShellTheme, seashellThemeData } from 'appConstants';
+import { Theme } from 'interface';
 
 export const initGA = () => {
 	ReactGA.initialize('G-S02J90JMSB');
@@ -108,11 +109,15 @@ export function getWarpImgByName(name) {
 	  }
 }
 
-export function getWarpTheme(theme) {
+export function getWarpTheme(theme: Theme) {
     const themeYaml = YAML.stringify({
         accent: theme.accent,
         background: theme.background?.color ?? theme.background,
         foreground: theme.foreground,
+		background_image: {
+			path: theme.background_image.path,
+			opacity: theme.background_image.opacity,
+		},
         details: theme.details,
         terminal_colors: {
             normal: {

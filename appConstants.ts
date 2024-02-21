@@ -1,4 +1,4 @@
-import { FeaturedThemeData } from "interface";
+import { FeaturedThemeData, Theme } from "interface";
 
 export const gruvboxDarkTheme = {
     'accent': '#458588',
@@ -58,10 +58,14 @@ export const coolNightTheme = {
     }
 };
 
-export const cyberPinkTheme = {
+export const cyberPinkTheme: Theme = {
     'accent': '#38ff9c',
     'background': '#010b17',
     'foreground': '#ebddf4',
+    'background_image': {
+        'path': 'CyberPink.png',
+        'opacity': 30
+    },
     'details': 'darker',
     'terminal_colors': {
         'normal': {
@@ -158,7 +162,7 @@ export const retroWaveTheme = {
     'background': '#0c0a20',
     'foreground': '#7984D1',
     'background_image': {
-        'path': 'retrowave-pyramids.png',
+        'path': 'RetroWave.png',
         'opacity': 30
     },
     'terminal_colors': {
