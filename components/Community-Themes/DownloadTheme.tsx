@@ -12,6 +12,11 @@ enum TerminalType {
     iTerm2 = 'iTerm2',
 }
 
+enum OperatingSystem {
+    Linux = 'Linux',
+    Mac = 'Mac',
+}
+
 interface Props {
     isOpen: boolean,
     setIsOpen: Dispatch<SetStateAction<boolean>>,
@@ -20,7 +25,9 @@ interface Props {
 
 export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
     const [terminal, setTerminal] = useState(TerminalType.Warp)
+    const [os, setOs] = useState(OperatingSystem.Linux)
     const themeName = theme.name.replace(/\s/g, "")
+    const themePath = os == OperatingSystem.Mac ? '~/.warp/themes/' : '~/.local/share/warp-terminal/themes/'
 
     async function downloadTheme(terminalType: TerminalType, theme: ThemeData) {
         const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
@@ -85,23 +92,38 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
                             </ol> :
                             <ol className='list-decimal ml-4'>
                                 <li>Download the file</li>
+                                {theme.content.background_image ? (
                                 <li>
-                                    Place the theme file into{' '}
-                                    <code className='text-sm bg-black text-white px-2 rounded'>~/.warp/themes/ </code>
-                                    So for example, after downloading the files, you can run something like: 
-                                    {theme.content.background_image ? (
-                                    <pre>
-                                        <code className='text-sm bg-black text-white px-2 rounded'>
-                                            mv /Users/jess/Downloads/{theme.content.background_image.path} /Users/jess/Downloads/{themeName}.yaml ~/.warp/themes
-                                        </code>
-                                    </pre> 
-                                ) : (
-                                    <pre>
-                                        <code className='text-sm bg-black text-white px-2 rounded'>
-                                            mv /Users/jess/Downloads/{themeName}.yaml ~/.warp/themes
+                                <li className="flex items-center">
+                                    Place the theme file and image png into{' '}
+                                    <code className='text-sm bg-black text-white px-2 ml-2 rounded'>{themePath}</code>
+                                </li>
+                                    So for example, after downloading the files, you can run something like:
+                                    <pre className='mt-1'>
+                                        <code className='text-sm bg-black text-white px-2 py-1 rounded'>
+                                            {`mv /Users/jess/Downloads/${theme.content.background_image.path}
+/Users/jess/Downloads/${themeName}.yaml
+${themePath}`}
                                         </code>
                                     </pre>
-                                )}
+
+                                </li>
+                        ) : (
+                            <li>
+                            <li className="flex items-center">
+                                Place the theme file into{' '}
+                                <code className='text-sm bg-black text-white px-2 ml-2 rounded'>{themePath}</code>
+                            </li>
+                                So for example, after downloading the files, you can run something like:
+                                <pre className='mt-1'>
+                                    <code className='text-sm bg-black text-white px-2 py-1 rounded'>
+                                        mv /Users/jess/Downloads/{themeName}.yaml {themePath}
+                                    </code>
+                                </pre>
+                                </li>
+                        )}
+                                 <li className="mt-2">
+                                    Restart Warp
                                 </li>
                                 <li>
                                     Open the Command Palette (<kbd className='kbd kbd-sm'>⌘</kbd> +{' '}
@@ -110,36 +132,69 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
                                 <li>Enjoy your new theme ✨</li>
                             </ol>
                         }
-                        <div className="flex items-center gap-4 mt-2">
-                            <label htmlFor="appSelect" className="font-medium">Select Terminal:</label>
-                            <div className="relative">
-                                <select
-                                    id="appSelect"
-                                    value={terminal}
-                                    onChange={(e) => setTerminal(e.target.value as TerminalType)}
-                                    className="block appearance-none w-full bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 leading-tight focus:outline-none focus:border-blue-500 focus:ring"
-                                >
-                                    <option value={TerminalType.iTerm2}>iTerm2</option>
-                                    <option value={TerminalType.Warp}>Warp</option>
-                                </select>
-                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    {/* Heroicon chevron-down icon */}
-                                    <svg
-                                        className="h-4 w-4"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                        aria-hidden="true"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 12.586L3.707 6.293a1 1 0 011.414-1.414L10 10.586l4.879-4.879a1 1 0 111.414 1.414l-5.5 5.5a1 1 0 01-1.414 0l-5.5-5.5a1 1 0 111.414-1.414L10 12.586z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
+<div className="flex gap-8 mt-4 mb-4">
+    <div className="flex items-center">
+        <label htmlFor="terminalSelect" className="font-medium mr-2">Select Terminal:</label>
+        <div className="relative">
+            <select
+                id="terminalSelect"
+                value={terminal}
+                onChange={(e) => setTerminal(e.target.value as TerminalType)}
+                className="block appearance-none w-full bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 leading-tight focus:outline-none focus:border-blue-500 focus:ring"
+            >
+                <option value={TerminalType.iTerm2}>iTerm2</option>
+                <option value={TerminalType.Warp}>Warp</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                {/* Heroicon chevron-down icon */}
+                <svg
+                    className="h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                >
+                    <path
+                        fillRule="evenodd"
+                        d="M10 12.586L3.707 6.293a1 1 0 011.414-1.414L10 10.586l4.879-4.879a1 1 0 111.414 1.414l-5.5 5.5a1 1 0 01-1.414 0l-5.5-5.5a1 1 0 111.414-1.414L10 12.586z"
+                        clipRule="evenodd"
+                    />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div className="flex items-center">
+        <label htmlFor="osSelect" className="font-medium mr-2">Select operating system:</label>
+        <div className="relative">
+            <select
+                id="osSelect"
+                value={os}
+                onChange={(e) => setOs(e.target.value as OperatingSystem)}
+                className="block appearance-none w-full bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 leading-tight focus:outline-none focus:border-blue-500 focus:ring"
+            >
+                <option value={OperatingSystem.Mac}>Mac</option>
+                {terminal === TerminalType.Warp && <option value={OperatingSystem.Linux}>Linux</option>}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                {/* Heroicon chevron-down icon */}
+                <svg
+                    className="h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                >
+                    <path
+                        fillRule="evenodd"
+                        d="M10 12.586L3.707 6.293a1 1 0 011.414-1.414L10 10.586l4.879-4.879a1 1 0 111.414 1.414l-5.5 5.5a1 1 0 01-1.414 0l-5.5-5.5a1 1 0 111.414-1.414L10 12.586z"
+                        clipRule="evenodd"
+                    />
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
                         <button
                             onClick={() => { downloadTheme(terminal, theme) }}
                             className='btn mt-2 w-full btn-ghost flex items-center gap-2'

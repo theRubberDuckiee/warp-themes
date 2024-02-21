@@ -15,7 +15,9 @@ function ColorInput(props) {
 							className='mb-3 bg-inherit font-medium outline-none rounded-md hover:bg-slate-200 focus:bg-slate-300 w-20 px-1 transition ease-in-out duration-300'
 							value={color}
 							spellCheck={false}
-							onChange={(e) => setColor(e.target.value)}
+							onChange={(e) => {
+								console.log('e', e.target.value)
+								setColor(e.target.value)}}
 							aria-label={name}
 						/>
 					</div>

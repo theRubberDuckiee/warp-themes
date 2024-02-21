@@ -4,6 +4,7 @@ import WarpAppBlock from '@components/Create-Theme/Warp/Block';
 
 function WarpAppCommand_Neofetch() {
 	const [context, _] = useAppContext();
+	// console.log('context', context)
 
 	return (
 		<WarpAppBlock command='neofetch' execution_time='0.016s'>

@@ -24,36 +24,23 @@ function AppSidebar() {
 				usernameOnChange={(u) => setContext({ ...context, username: u })}
 			/>
 			<h2 className='text-lg font-medium text-gray-900'>General Colors</h2>
-			<div className='mb-4 flex flex-row space-x-6'>
-				<ColorInput
-					name='Accent'
-					color={context.content.accent}
-					setColor={(c) => setContext({ ...context, accent: { ...context.content.accent, color: c } })}
-				/>
-				<ColorInput
-					name='Background'
-					color={context.content.background}
-					setColor={(c) =>
-						setContext({
-							...context,
-							background: {
-								...context.content.background,
-								color: c,
-							},
-						})
-					}
-				/>
-				<ColorInput
-					name='Foreground'
-					color={context.content.foreground}
-					setColor={(c) =>
-						setContext({
-							...context,
-							foreground: c,
-						})
-					}
-				/>
-			</div>
+            <div className='mb-4 flex flex-row space-x-6'>
+                <ColorInput
+                    name='Accent'
+                    color={context.content.accent}
+                    setColor={(c) => setContext({ ...context, content: { ...context.content, accent: c } })}
+                />
+                <ColorInput
+                    name='Background'
+                    color={context.content.background}
+                    setColor={(c) => setContext({ ...context, content: { ...context.content, background: c } })}
+                />
+                <ColorInput
+                    name='Foreground'
+                    color={context.content.foreground}
+                    setColor={(c) => setContext({ ...context, content: { ...context.content, foreground: c } })}
+                />
+            </div>
 			<h2 className='text-lg font-medium text-gray-900'>Terminal Colors</h2>
 			<Tab.Group>
 				<Tab.List className='flex flex-row justify-between space-x-4 rounded-lg py-4 text-lg'>
@@ -78,10 +65,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											normal: { ...context.content.terminal_colors.normal, black: c },
 										},
+									},
 									})
 								}
 							/>
@@ -91,10 +81,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											normal: { ...context.content.terminal_colors.normal, red: c },
 										},
+									},
 									})
 								}
 							/>
@@ -104,10 +97,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											normal: { ...context.content.terminal_colors.normal, green: c },
 										},
+									},
 									})
 								}
 							/>
@@ -119,10 +115,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											normal: { ...context.content.terminal_colors.normal, yellow: c },
 										},
+									},
 									})
 								}
 							/>
@@ -132,10 +131,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											normal: { ...context.content.terminal_colors.normal, blue: c },
 										},
+									},
 									})
 								}
 							/>
@@ -145,10 +147,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											normal: { ...context.content.terminal_colors.normal, magenta: c },
 										},
+									},
 									})
 								}
 							/>
@@ -160,10 +165,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											normal: { ...context.content.terminal_colors.normal, cyan: c },
 										},
+									},
 									})
 								}
 							/>
@@ -173,9 +181,12 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											normal: { ...context.content.terminal_colors.normal, white: c },
+										},
 										},
 									})
 								}
@@ -190,10 +201,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											bright: { ...context.content.terminal_colors.bright, black: c },
 										},
+									},
 									})
 								}
 							/>
@@ -203,10 +217,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											bright: { ...context.content.terminal_colors.bright, red: c },
 										},
+									},
 									})
 								}
 							/>
@@ -216,10 +233,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											bright: { ...context.content.terminal_colors.bright, green: c },
 										},
+									},
 									})
 								}
 							/>
@@ -231,10 +251,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											bright: { ...context.content.terminal_colors.bright, yellow: c },
 										},
+									},
 									})
 								}
 							/>
@@ -244,10 +267,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											bright: { ...context.content.terminal_colors.bright, blue: c },
 										},
+									},
 									})
 								}
 							/>
@@ -257,10 +283,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											bright: { ...context.content.terminal_colors.bright, magenta: c },
 										},
+									},
 									})
 								}
 							/>
@@ -272,10 +301,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											bright: { ...context.content.terminal_colors.bright, cyan: c },
 										},
+									},
 									})
 								}
 							/>
@@ -285,10 +317,13 @@ function AppSidebar() {
 								setColor={(c) =>
 									setContext({
 										...context,
+										content: {
+                                            ...context.content,
 										terminal_colors: {
 											...context.content.terminal_colors,
 											bright: { ...context.content.terminal_colors.bright, white: c },
 										},
+									},
 									})
 								}
 							/>
