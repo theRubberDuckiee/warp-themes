@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import AppNavbar from '@components/Shared/Navbar/Navbar';
 import { FeaturedThemeData } from 'interface';
+import ReactGA from 'react-ga';
 
 interface Props {
     img: string[];
@@ -38,6 +39,14 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
             );
         },
     };
+
+    const trackDownloadClick = () => {
+        ReactGA.event({
+          category: 'External Link',
+          action: `Click Download button for ${themeData.themeData.name} theme`
+        });
+      };
+    
 
     // Custom arrow components for the Slider
     function NextArrow(props) {
@@ -87,7 +96,10 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
 </div>
                         <div className="mt-12 flex justify-center">
                             <div>
-                                <button onClick={() => setIsOpen(true)} className="btn btn-primary px-4 py-2 text-2xl">
+                                <button onClick={() => {
+                                    setIsOpen(true)
+                                    trackDownloadClick()
+                                    }} className="btn btn-primary px-4 py-2 text-2xl">
                                     Download Theme
                                 </button>
                                 <DownloadTheme isOpen={isOpen} setIsOpen={setIsOpen} theme={themeData.themeData} />

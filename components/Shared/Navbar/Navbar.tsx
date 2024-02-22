@@ -1,10 +1,18 @@
 import WarpThemesLogo from '@components/Shared/Navbar/WarpThemesLogo';
 import Link from 'next/link';
 import router from 'next/router';
+import ReactGA from 'react-ga'; // Import ReactGA for Google Analytics tracking
 
 function AppNavbar() {
   const navigateToCreateTheme = () => {
     router.push('/create-theme');
+  };
+
+  const trackMadeByWarpClick = () => {
+    ReactGA.event({
+      category: 'External Link',
+      action: 'Click Made by Warp Button'
+    });
   };
 
   return (
@@ -18,7 +26,7 @@ function AppNavbar() {
       <button onClick={navigateToCreateTheme} className='btn btn-ghost'>
         Create a theme
       </button>
-      <a href="https://www.warp.dev/?utm_source=warp-themes" target="_blank" rel="noopener noreferrer" className='btn btn-ghost'>
+      <a href="https://www.warp.dev/?utm_source=warp-themes" onClick={trackMadeByWarpClick} target="_blank" rel="noopener noreferrer" className='btn btn-ghost'>
         Made by Warp
       </a>
     </nav>
@@ -26,4 +34,3 @@ function AppNavbar() {
 }
 
 export default AppNavbar;
- 

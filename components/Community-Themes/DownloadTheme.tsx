@@ -3,9 +3,6 @@ import DownloadIcon from '@heroicons/react/outline/DownloadIcon';
 import { Theme, ThemeData } from 'interface';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { getWarpImgByName, getWarpTheme, getiTerm2Theme } from 'utils';
-import JSZip from 'jszip';
-import fs from 'fs';
-import path from 'path';
 
 enum TerminalType {
     Warp = 'Warp',
