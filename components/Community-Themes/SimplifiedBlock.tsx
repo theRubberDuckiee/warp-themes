@@ -1,10 +1,9 @@
-import { useAppContext } from '@lib/AppContext';
-
-import WarpAppBlock from '@components/Create-Theme/Warp/Block';
+import React from 'react';
 import SimplifiedNeofetch from './SimplifiedNeofetch';
+import { ThemeData } from 'interface';
 
 interface Props {
-    theme: any;
+    theme: ThemeData;
 }
 
 function WarpAppCommand_Neofetch(props: Props) {

@@ -1,15 +1,27 @@
-// pages/themes/[themeId].tsx
-
 import ThemePage from '@components/Theme-Page';
-import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { collection, doc, getDoc, getFirestore } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { db } from 'pages/api/create';
 import { useEffect, useState } from 'react';
+import React from 'react';
 
 const ThemeIdPage = () => {
   const router = useRouter();
   const { themeId } = router.query;
   const [themeData, setThemeData] = useState(null);
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBzZfDNCqyrwUW8DvWSnEBn-Q-6mIzxADQ",
+    authDomain: "warp-themes-cf724.firebaseapp.com",
+    projectId: "warp-themes-cf724",
+    storageBucket: "warp-themes-cf724.appspot.com",
+    messagingSenderId: "227546572873",
+    appId: "1:227546572873:web:4251b2470105d315223798",
+    measurementId: "G-YY8ELH4ZN6"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
   useEffect(() => {
     async function fetchTheme() {

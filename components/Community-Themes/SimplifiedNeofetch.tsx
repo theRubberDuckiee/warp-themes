@@ -1,6 +1,13 @@
 import WarpAppBlock from '@components/Create-Theme/Warp/Block';
+import { ThemeData } from 'interface';
+import React from 'react';
 
-function SimplifiedNeofetch({theme}) {
+interface Props {
+    theme: ThemeData;
+}
+
+
+function SimplifiedNeofetch({theme}: Props) {
 	return (
 		<WarpAppBlock command='neofetch' execution_time='0.016s'>
 			<div className='flex flex-row items-center'>

@@ -2,9 +2,10 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import AppContext from '@lib/AppContext';
 import '@styles/globals.css';
-import * as ga from '../utils';
+import * as ga from '../utils/utils';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import React from 'react';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -21,7 +22,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YY8ELH4ZN6"></script>
         <script
           dangerouslySetInnerHTML={{

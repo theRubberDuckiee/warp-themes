@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
 import AllCommunityThemes from './AllCommunityThemes';
 import FeaturedCommunityThemes from './FeaturedCommunityThemes';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from 'pages/api/create';
-import * as ga from '../../utils';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import * as ga from '../../utils/utils';
 import { ThemeData } from 'interface';
+import React, { useEffect, useState } from 'react';
+import { initializeApp } from 'firebase/app';
+import AppDialogITermColors from '@components/ITerm2';
 
 export default function LandingPage() {
   const [view, setView] = useState<'featured' | 'all'>('featured');
@@ -17,6 +18,19 @@ export default function LandingPage() {
   useEffect(() => {
     async function fetchData() {
       try {
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyBzZfDNCqyrwUW8DvWSnEBn-Q-6mIzxADQ",
+          authDomain: "warp-themes-cf724.firebaseapp.com",
+          projectId: "warp-themes-cf724",
+          storageBucket: "warp-themes-cf724.appspot.com",
+          messagingSenderId: "227546572873",
+          appId: "1:227546572873:web:4251b2470105d315223798",
+          measurementId: "G-YY8ELH4ZN6"
+          };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
         const themesCollectionRef = collection(db, 'themes');
         const querySnapshot = await getDocs(themesCollectionRef);
 
@@ -24,17 +38,24 @@ export default function LandingPage() {
           const themesData: ThemeData[] = [];
           querySnapshot.forEach((doc) => {
             const data = doc.data()
-            themesData.push({
+            const newThemeData = {
               tId: doc.id,
-              username: data.username,
+              themeUser: {
+                // To make sure this is backwards compatatible with the old schema (username instead of themeUser)
+                displayName: data.themeUser?.displayName ?? data.username,
+                photoURL: data.themeUser?.photoURL,
+                uid: data.themeUser?.uid,
+                description: data.themeUser?.description
+              },
               content: data.content,
-              name: data.name
-            });
+              name: data.name,
+              counter: data.counter
+            }
+            themesData.push(newThemeData);         
           });
           setThemes(themesData)
           setUploadedThemesCount(themesData.length)
         }
-      } catch (error) {
       } finally {
         setLoading(false);
       }

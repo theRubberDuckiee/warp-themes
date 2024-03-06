@@ -1,10 +1,7 @@
-import ThemeLandingPage from '@components/Theme-Page';
 import ThemeWithBackground from '@components/Theme-Page/ThemeWithBackground';
-import { doc, getDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { db } from 'pages/api/create';
-import { useEffect, useState } from 'react';
-import { getWarpImgByName, getWarpThemeByName } from 'utils';
+import { getWarpImgByName, getWarpThemeByName } from 'utils/getFeaturedThemesUtils';
+import React from 'react';
 
 const ThemePage = () => {
   const router = useRouter();

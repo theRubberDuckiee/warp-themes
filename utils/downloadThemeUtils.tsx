@@ -1,113 +1,11 @@
+import { TerminalType } from "constants/downloadConstants";
+import { initializeApp } from "firebase/app";
+import { doc, getFirestore, increment, updateDoc } from "firebase/firestore";
+import hexRgb from "hex-rgb";
+import { Theme, ThemeData } from "interface";
 import YAML from 'json-to-pretty-yaml';
-import hexRgb from 'hex-rgb';
-import ReactGA from 'react-ga';
-import { coolNightTheme, coolNightThemeData, cyberPinkTheme, cyberpinkThemeData, draculaTheme, draculaThemeData, gruvboxDarkTheme, gruvboxDarkThemeData, linuxLaunchTheme, linuxLaunchThemeData, retroWaveTheme, retrowaveThemeData, seaShellTheme, seashellThemeData } from 'appConstants';
-import { Theme } from 'interface';
-
-export const initGA = () => {
-	ReactGA.initialize('G-S02J90JMSB');
-  };
-
-export const logPageView = () => {
-	ReactGA.set({ page: window.location.pathname });
-	ReactGA.pageview(window.location.pathname);
-};
-
-export function getWarpThemeByName(name) {
-	switch (name) {
-		case "Gruvbox Dark":
-		  return gruvboxDarkThemeData
-		case "Cool Night":
-		  return coolNightThemeData
-		case "Cyberpink":
-			return cyberpinkThemeData
-		case "Dracula":
-			return draculaThemeData
-		case "Linux Launch":
-			return linuxLaunchThemeData
-		case "Retrowave":
-			return retrowaveThemeData
-		case "Seashell":
-			return seashellThemeData
-		default:
-		  break
-	  }
-}
-
-export function getWarpImgByName(name) {
-	switch (name) {
-		case "Gruvbox Dark":
-		  return [
-			'/FeaturedThemes/Gruvbox/GruvboxDark.png',
-			'/FeaturedThemes/Gruvbox/GruvboxDark02.png',
-			'/FeaturedThemes/Gruvbox/GruvboxDark03.png',
-			'/FeaturedThemes/Gruvbox/GruvboxDark04.png',
-			'/FeaturedThemes/Gruvbox/GruvboxDark05.png',
-			'/FeaturedThemes/Gruvbox/GruvboxDark06.png',
-		]
-		case "Cool Night":
-		  return [
-			'/FeaturedThemes/CoolNight/CoolNight.png',
-			'/FeaturedThemes/CoolNight/CoolNight02.png',
-			'/FeaturedThemes/CoolNight/CoolNight03.png',
-			'/FeaturedThemes/CoolNight/CoolNight04.png',
-			'/FeaturedThemes/CoolNight/CoolNight05.png',
-			'/FeaturedThemes/CoolNight/CoolNight06.png',
-			'/FeaturedThemes/CoolNight/CoolNight07.png',
-			'/FeaturedThemes/CoolNight/CoolNight08.png',
-		]
-		case "Cyberpink":
-			return [
-				'/FeaturedThemes/Cyberpink/Cyberpink.png',
-				'/FeaturedThemes/Cyberpink/Cyberpink02.png',
-				'/FeaturedThemes/Cyberpink/Cyberpink03.png',
-				'/FeaturedThemes/Cyberpink/Cyberpink04.png',
-				'/FeaturedThemes/Cyberpink/Cyberpink05.png',
-			]
-		case "Dracula":
-			return [
-				'/FeaturedThemes/Dracula/Dracula.png',
-				'/FeaturedThemes/Dracula/Dracula02.png',
-				'/FeaturedThemes/Dracula/Dracula03.png',
-				'/FeaturedThemes/Dracula/Dracula04.png',
-				'/FeaturedThemes/Dracula/Dracula05.png',
-			]
-		case "Linux Launch":
-			return ['/FeaturedThemes/LinuxLaunch/LinuxLaunch.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch03.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch04.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch05.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch06.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch07.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch08.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch09.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch10.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch11.png',
-					'/FeaturedThemes/LinuxLaunch/LinuxLaunch12.png',
-		]
-		case "Retrowave":
-			return [
-				'/FeaturedThemes/Retrowave/RetroWave.png',
-				'/FeaturedThemes/Retrowave/RetroWave02.png',
-				'/FeaturedThemes/Retrowave/RetroWave03.png',
-				'/FeaturedThemes/Retrowave/RetroWave04.png',
-				'/FeaturedThemes/Retrowave/RetroWave05.png',
-			]
-		case "Seashell":
-			return [
-				'/FeaturedThemes/Seashell/Seashell.png',
-				'/FeaturedThemes/Seashell/Seashell02.png',
-				'/FeaturedThemes/Seashell/Seashell03.png',
-				'/FeaturedThemes/Seashell/Seashell04.png',
-				'/FeaturedThemes/Seashell/Seashell05.png',
-				'/FeaturedThemes/Seashell/Seashell06.png',
-				'/FeaturedThemes/Seashell/Seashell07.png',
-				'/FeaturedThemes/Seashell/Seashell08.png',
-			]
-		default:
-		  break
-	  }
-}
+import { db } from "pages/api/create";
+import React from "react";
 
 export function getWarpTheme(theme: Theme) {
     const yamlData = {
@@ -516,4 +414,129 @@ export function getiTerm2Theme(theme) {
 </dict>
 </plist>`
 return iTerm2Theme
+}
+
+export async function downloadTheme(terminalType: TerminalType, theme: ThemeData, themeName: string) {
+	const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
+	const extension = terminalType === TerminalType.Warp ? 'yaml' : 'itermcolors';
+	const yamlBlob = new Blob([themeYaml], { type: `application/${extension}` });
+
+	try {
+		const yamlObjectURL = window.URL.createObjectURL(yamlBlob);
+		const yamlDownloadLink = document.createElement('a');
+		yamlDownloadLink.href = yamlObjectURL;
+		yamlDownloadLink.download = `${themeName}.yaml`;
+		document.body.appendChild(yamlDownloadLink);
+
+		// Trigger download for the YAML file
+		yamlDownloadLink.click();
+
+		// Clean up
+		yamlDownloadLink.remove();
+		window.URL.revokeObjectURL(yamlObjectURL);
+
+		if (theme.backgroundImageSrc) {
+			// Create download link for the PNG file
+			const pngDownloadLink = document.createElement('a');
+			pngDownloadLink.href = theme.backgroundImageSrc;
+			pngDownloadLink.download = `${theme.content.background_image.path}`;
+			document.body.appendChild(pngDownloadLink);
+	
+			// Trigger download for the PNG file
+			pngDownloadLink.click();
+			pngDownloadLink.remove();
+		}
+		const firebaseConfig = {
+			apiKey: "AIzaSyBzZfDNCqyrwUW8DvWSnEBn-Q-6mIzxADQ",
+			authDomain: "warp-themes-cf724.firebaseapp.com",
+			projectId: "warp-themes-cf724",
+			storageBucket: "warp-themes-cf724.appspot.com",
+			messagingSenderId: "227546572873",
+			appId: "1:227546572873:web:4251b2470105d315223798",
+			measurementId: "G-YY8ELH4ZN6"
+		};
+		
+		const app = initializeApp(firebaseConfig);
+		const db = getFirestore(app);
+		const docRef = doc(db, 'themes', theme.tId);
+		await updateDoc(docRef, {
+			counter: increment(1)
+		});
+		
+	} catch (error) {
+		console.error('Error:', error);
+	}
+}
+
+export function getWarpManualDownloadInstructionNoBackgroundImage(theme: ThemeData, themeName: string, themePath: string) {
+	const fileWord = theme.backgroundImageSrc ? 'themes' : 'theme'
+	return (
+		<ol className='list-decimal ml-4'>
+			<li>Download the {fileWord}</li>
+			<li>
+			<li className="flex items-center">
+				Place the theme file into{' '}
+				<code className='text-sm bg-black text-white px-2 ml-2 rounded'>{themePath}</code>
+			</li>
+				So for example, after downloading the files, you can run something like:
+				<pre className='mt-1'>
+					<code className='text-sm bg-black text-white px-2 py-1 rounded'>
+						mv /Users/jess/Downloads/{themeName}.yaml {themePath}
+					</code>
+				</pre>
+				</li>
+		</ol>
+	)
+}
+
+export function getWarpManualDownloadInstructionCustomBackgroundImage(theme: ThemeData, themeName: string, themePath: string) {
+	const fileWord = theme.backgroundImageSrc ? 'themes' : 'theme'
+	return (
+		<ol className='list-decimal ml-4'>
+			<li>Download the {fileWord}</li>
+			<li>
+                                <li className="flex items-center">
+                                    Place the theme file and image png into{' '}
+                                    <code className='text-sm bg-black text-white px-2 ml-2 rounded'>{themePath}</code>
+                                </li>
+                                    So for example, after downloading the files, you can run something like:
+                                    <pre className='mt-1'>
+                                        <code className='text-sm bg-black text-white px-2 py-1 rounded'>
+                                            {`mv /Users/jess/Downloads/${theme.content.background_image.path}
+/Users/jess/Downloads/${themeName}.yaml
+${themePath}`}
+                                        </code>
+                                    </pre>
+
+            </li>
+		</ol>
+	)
+}
+
+export function getiTerm2ManualDownloadInstructionNoBackgroundImage() {
+	return (
+		<ol className='list-decimal ml-4'>
+		<li>Go into iTerm2</li>
+		<li>Press <kbd className='kbd kbd-sm'>⌘</kbd> +{' '}
+			<kbd className='kbd kbd-sm'>i</kbd> and navigate to the Colors tab</li>
+		<li>Click on Load Presets</li>
+		<li>Click on Import</li>
+		<li>Select the .itermcolors file of the scheme you%aposd like to use.</li>
+		<li>Enjoy your new theme ✨</li>
+	</ol>
+	)
+}
+
+export function getiTerm2ManualDownloadInstructionCustomBackgroundImage() {
+	return (
+		<ol className='list-decimal ml-4'>
+		<li>Go into iTerm2</li>
+		<li>Press <kbd className='kbd kbd-sm'>⌘</kbd> +{' '}
+			<kbd className='kbd kbd-sm'>i</kbd> and navigate to the Colors tab</li>
+		<li>Click on Load Presets</li>
+		<li>Click on Import</li>
+		<li>Select the .itermcolors file of the scheme you%aposd like to use.</li>
+		<li>Enjoy your new theme ✨</li>
+	</ol>
+	)
 }

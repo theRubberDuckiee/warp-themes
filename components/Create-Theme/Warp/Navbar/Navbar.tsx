@@ -1,6 +1,7 @@
 import { WarpAppBlockDivider } from '../Block';
 import WarpAppNavbarTab from '../Tab';
 import WarpAppNavbarSystemButtons from './SystemButton';
+import React from 'react';
 
 function WarpAppNavbar() {
 	return (

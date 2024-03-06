@@ -6,7 +6,7 @@ export interface Theme {
         path: string,
         opacity: number,
     }
-    accent: string | {},
+    accent: string,
     details: string,
     terminal_colors: {
         bright: {
@@ -35,12 +35,25 @@ export interface Theme {
 export interface ThemeData {
     name: string,
     content: Theme,
-    username: string,
+    themeUser: User,
+    counter: number,
     backgroundImageSrc?: string
     tId?: string
+}
+
+export interface AppInterface {
+    themeData: ThemeData,
+    user: User,
 }
 
 export interface FeaturedThemeData {
     themeData: ThemeData,
     imgSrc: string
+}
+
+export interface User {
+    displayName: string,
+    photoURL: string,
+    uid: string,
+    description: string,
 }

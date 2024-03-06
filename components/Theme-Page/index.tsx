@@ -1,11 +1,16 @@
-import { DownloadTheme } from '@components/Community-Themes/DownloadTheme';
+import { DownloadTheme } from '@components/Shared/DownloadTheme';
 import ThemePreview from '@components/Community-Themes/ThemePreview';
+import GoogleSignInButton from '@components/Login/Login';
 import AppNavbar from '@components/Shared/Navbar/Navbar';
-import { DownloadIcon } from '@heroicons/react/outline';
-import Link from 'next/link';
+import { ThemeData } from 'interface';
 import { useState } from 'react';
+import React from 'react';
 
-function ThemeLandingPage({ themeData }) {
+interface Props {
+    themeData: ThemeData
+}
+
+function ThemeLandingPage({themeData}: Props) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -13,11 +18,12 @@ function ThemeLandingPage({ themeData }) {
         <div className='w-full border-b z-20 hidden sm:block'>
             <AppNavbar />
         </div>
+        <GoogleSignInButton/>
         <div className="bg-gray-900 text-white min-h-screen flex justify-center items-center">
             {themeData && (
                 <div className="max-w-screen-xl mx-auto p-8 rounded-lg w-full lg:w-3/4 xl:w-2/3">
                     <h1 className="text-3xl font-bold mb-6 mt-24 text-center">{themeData.name}</h1>
-                    <p className="text-lg mb-12 text-center">Creator: {themeData.username}</p>
+                    <p className="text-lg mb-12 text-center">Creator: {themeData.themeUser?.displayName ?? themeData.username}</p>
                     <div className="mt-4">
                         <div className="overflow-hidden">
                             <div className="flex gap-4">
@@ -29,6 +35,11 @@ function ThemeLandingPage({ themeData }) {
                         <button onClick={() => { setIsOpen(true) }} className="btn btn-primary px-4 py-2">
                             Download Theme
                         </button>
+                        {themeData.counter &&
+                            <div className="ml-8">
+                                # of Downloads: {themeData.counter}
+                            </div>
+                        }
                         <DownloadTheme isOpen={isOpen} setIsOpen={setIsOpen} theme={themeData} />
                     </div>
                 </div>

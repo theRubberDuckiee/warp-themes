@@ -1,20 +1,14 @@
-import { ColorSwatchIcon, SunIcon, MoonIcon, CakeIcon, CubeIcon } from '@heroicons/react/outline';
-
-import { useAppContext } from '@lib/AppContext';
+import { ColorSwatchIcon, CubeIcon } from '@heroicons/react/outline';
+import React from 'react';
 
 interface Props {
 	themeValue: string;
 	themeOnChange: (themeName: string) => void;
-	detailsValue: string;
-	detailsOnChange: (details: string) => void;
 	usernameValue: string;
 	usernameOnChange: (username: string) => void;
 }
 
-function SidebarThemeInput(props: Props) {
-	const [_c, _s] = useAppContext();
-	const { themeValue, themeOnChange, detailsValue, detailsOnChange, usernameValue, usernameOnChange } = props;
-
+function SidebarThemeInput({themeValue, themeOnChange, usernameValue, usernameOnChange}: Props) {
 	return (
 		<div className='mt-4 mb-8 flex flex-col'>
 			<h2 className='mb-2 text-lg font-medium text-gray-900'>Theme Name</h2>

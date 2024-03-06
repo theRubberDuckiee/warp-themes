@@ -1,16 +1,15 @@
 import { useAppContext } from '@lib/AppContext';
-
+import React from 'react';
 import WarpAppBlock from '@components/Create-Theme/Warp/Block';
 
 function WarpAppCommand_Neofetch() {
-	const [context, _] = useAppContext();
-	// console.log('context', context)
+	const [context] = useAppContext();
 
 	return (
 		<WarpAppBlock command='neofetch' execution_time='0.016s'>
 			<div className='flex flex-row items-center'>
 				<pre className='mr-12'>
-					<span style={{ color: context.content.terminal_colors.normal.green }}>
+					<span style={{ color: context.themeData.content.terminal_colors.normal.green }}>
 						&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&apos;c.
 						<br />
 						&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;,xNMM.
@@ -23,13 +22,13 @@ function WarpAppCommand_Neofetch() {
 						<br />
 						&emsp;&emsp;cKMMMMMMMMMMNWMMMMMMMMMM0:
 					</span>
-					<span style={{ color: context.content.terminal_colors.normal.yellow }}>
+					<span style={{ color: context.themeData.content.terminal_colors.normal.yellow }}>
 						<br />
 						&emsp;.KMMMMMMMMMMMMMMMMMMMMMMMWd.
 						<br />
 						&emsp;XMMMMMMMMMMMMMMMMMMMMMMMX.
 					</span>
-					<span style={{ color: context.content.terminal_colors.normal.red }}>
+					<span style={{ color: context.themeData.content.terminal_colors.normal.red }}>
 						<br />
 						;MMMMMMMMMMMMMMMMMMMMMMMM:
 						<br />
@@ -39,13 +38,13 @@ function WarpAppCommand_Neofetch() {
 						<br />
 						&emsp;kMMMMMMMMMMMMMMMMMMMMMMMWd.
 					</span>
-					<span style={{ color: context.content.terminal_colors.normal.magenta }}>
+					<span style={{ color: context.themeData.content.terminal_colors.normal.magenta }}>
 						<br />
 						&nbsp;.XMMMMMMMMMMMMMMMMMMMMMMMMk
 						<br />
 						&nbsp;&nbsp;.XMMMMMMMMMMMMMMMMMMMMMMK.
 					</span>
-					<span style={{ color: context.content.terminal_colors.normal.blue }}>
+					<span style={{ color: context.themeData.content.terminal_colors.normal.blue }}>
 						<br />
 						&emsp;&emsp;&emsp;kMMMMMMMMMMMMMMMMMMMMd
 						<br />
@@ -56,39 +55,39 @@ function WarpAppCommand_Neofetch() {
 				</pre>
 				<div>
 					<p>
-						<b style={{ color: context.content.terminal_colors.normal.green }}>root</b>@
-						<b style={{ color: context.content.terminal_colors.normal.green }}>warp-themes</b>
+						<b style={{ color: context.themeData.content.terminal_colors.normal.green }}>root</b>@
+						<b style={{ color: context.themeData.content.terminal_colors.normal.green }}>warp-themes</b>
 					</p>
 					<p>--------------------</p>
 					<p>
-						<b style={{ color: context.content.terminal_colors.normal.yellow }}>Host</b>: warp-themes.com
+						<b style={{ color: context.themeData.content.terminal_colors.normal.yellow }}>Host</b>: warp-themes.com
 					</p>
 					<p>
-						<b style={{ color: context.content.terminal_colors.normal.yellow }}>Uptime</b>: 12 hours, 8
+						<b style={{ color: context.themeData.content.terminal_colors.normal.yellow }}>Uptime</b>: 12 hours, 8
 						mins&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 					</p>
 					<p>
-						<b style={{ color: context.content.terminal_colors.normal.yellow }}>Shell</b>: zsh
+						<b style={{ color: context.themeData.content.terminal_colors.normal.yellow }}>Shell</b>: zsh
 					</p>
 					<p>
-						<b style={{ color: context.content.terminal_colors.normal.yellow }}>Terminal</b>: WarpTerminal
+						<b style={{ color: context.themeData.content.terminal_colors.normal.yellow }}>Terminal</b>: WarpTerminal
 					</p>
 					<br />
 					<div className='flex flex-row'>
-						{Object.keys(context.content.terminal_colors.normal).map((color) => (
+						{Object.keys(context.themeData.content.terminal_colors.normal).map((color) => (
 							<div
 								key={`normal-${color}`}
 								className='h-1 w-1 p-3'
-								style={{ backgroundColor: context.content.terminal_colors.normal[color] }}
+								style={{ backgroundColor: context.themeData.content.terminal_colors.normal[color] }}
 							></div>
 						))}
 					</div>
 					<div className='flex flex-row'>
-						{Object.keys(context.content.terminal_colors.bright).map((color) => (
+						{Object.keys(context.themeData.content.terminal_colors.bright).map((color) => (
 							<div
 								key={`bright-${color}`}
 								className='h-1 w-1 p-3'
-								style={{ backgroundColor: context.content.terminal_colors.bright[color] }}
+								style={{ backgroundColor: context.themeData.content.terminal_colors.bright[color] }}
 							></div>
 						))}
 					</div>

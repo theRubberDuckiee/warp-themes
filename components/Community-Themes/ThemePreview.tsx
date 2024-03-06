@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
 import SimplifiedBlock from "./SimplifiedBlock";
 import SimplifiedNavBar from "./SimplifiedNavBar";
 import SimplifiedPrompt from "./SimplifiedPrompt";
 import { ThemeData } from "interface";
+import React from 'react';
 
 interface Props {
     theme: ThemeData
 }
 
-export default function ThemePreview({theme}) {
+export default function ThemePreview({theme}:Props) {
     return (
         <div className="w-full relative" style={{ width: '800px', height: '540px'}}>
             <div

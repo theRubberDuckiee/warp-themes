@@ -1,13 +1,14 @@
 import { WarpAppBlockDivider } from "@components/Create-Theme/Warp/Block";
 import WarpAppNavbarSystemButtons from "@components/Create-Theme/Warp/Navbar/SystemButton";
 import ThemeTab from "./ThemeTab";
-import { Theme } from "interface";
+import React from 'react';
+import { ThemeData } from "interface";
 
 interface Props {
-    theme: Theme;
+    theme: ThemeData;
 }
 
-function SimplifiedNavBar({theme}) {
+function SimplifiedNavBar({theme}: Props) {
 	return (
 		<div className='flex-co relative flex'>
 			<div className='z-20 flex flex-row items-center'>

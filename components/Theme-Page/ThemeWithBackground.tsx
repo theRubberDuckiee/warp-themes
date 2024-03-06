@@ -1,4 +1,4 @@
-import { DownloadTheme } from '@components/Community-Themes/DownloadTheme';
+import { DownloadTheme } from '@components/Shared/DownloadTheme';
 import { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import AppNavbar from '@components/Shared/Navbar/Navbar';
 import { FeaturedThemeData } from 'interface';
 import ReactGA from 'react-ga';
+import React from 'react';
 
 interface Props {
     img: string[];
@@ -16,7 +17,6 @@ interface Props {
 function ThemeWithBackground({ img, themeData, name }: Props) {
     const [isOpen, setIsOpen] = useState(false);
 
-    // Settings for the carousel
     const settings = {
         dots: true,
         infinite: true,
@@ -25,7 +25,7 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
         slidesToScroll: 1,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
-        customPaging: function(i) {
+        customPaging: function() {
             return (
                 <div
                     style={{
@@ -47,14 +47,12 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
         });
       };
     
-
-    // Custom arrow components for the Slider
     function NextArrow(props) {
         const { className, style, onClick } = props;
         return (
             <div
                 className={className + " text-white"}
-                style={{ ...style, display: "block", background: "transparent", zIndex: "1" }} // Adjusted right position
+                style={{ ...style, display: "block", background: "transparent", zIndex: "1" }}
                 onClick={onClick}
             >
                 <i className="fas fa-chevron-right fa-3x"></i>
@@ -67,7 +65,7 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
         return (
             <div
                 className={className + " text-white"}
-                style={{ ...style, display: "block", background: "transparent", zIndex: "1" }} // Adjusted left position
+                style={{ ...style, display: "block", background: "transparent", zIndex: "1" }}
                 onClick={onClick}
             >
                 <i className="fas fa-chevron-left fa-3x"></i>
@@ -84,7 +82,7 @@ function ThemeWithBackground({ img, themeData, name }: Props) {
                 {themeData && (
                     <div className="max-w-screen-xl mx-auto p-8 rounded-lg w-full lg:w-3/4 xl:w-2/3">
                         <h1 className="text-7xl font-bold mb-4 mt-36 text-center">{name}</h1>
-                        <p className="text-2xl mb-12 text-center">Created by: {themeData.themeData.username}</p>
+                        <p className="text-2xl mb-12 text-center">Created by: {themeData.themeData.themeUser?.displayName ?? 'Anon'}</p>
                         <div className="mt-0">
     <Slider {...settings}>
         {img.map((image, index) => (

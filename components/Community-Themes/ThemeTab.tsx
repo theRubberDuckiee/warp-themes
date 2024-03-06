@@ -1,11 +1,12 @@
-import { Theme } from "interface";
+import { ThemeData } from "interface";
+import React from 'react';
 
 interface Props {
     title: string
-    theme: Theme
+    theme: ThemeData
 }
 
-function ThemeTab({title, theme}) {
+function ThemeTab({title, theme}: Props) {
 	return (
 		<div
 			className={`relative p-2 px-12 text-sm border-b-2`}

@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from 'react';
 
-const WarpThemesLogo = (props) => (
+const WarpThemesLogo = () => (
   <svg xmlns="http://www.w3.org/2000/svg"
        width="20px"
        height="80px" 

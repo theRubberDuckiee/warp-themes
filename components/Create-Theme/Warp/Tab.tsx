@@ -1,4 +1,5 @@
 import { useAppContext } from '@lib/AppContext';
+import React from 'react';
 
 interface Props {
 	title: string;
@@ -6,13 +7,13 @@ interface Props {
 }
 
 function WarpAppNavbarTab(props: Props) {
-	const [context, _] = useAppContext();
+	const [context] = useAppContext();
 	const { title, active } = props;
 
 	return (
 		<div
 			className={`relative p-2 px-12 text-sm ${active ? 'border-b-4' : 'opacity-70'}`}
-			style={{ borderColor: context.content.accent }}
+			style={{ borderColor: context.themeData.content.accent }}
 		>
 			{title}
 		</div>

@@ -1,17 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
+  import { NextApiRequest, NextApiResponse } from 'next';
+  import { initializeApp } from 'firebase/app';
+  import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
-// const firebaseConfig = {
-// 	apiKey: process.env.FIREBASE_API_KEY,
-// 	authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-// 	projectId: process.env.FIREBASE_PROJECT_ID,
-// 	storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-// 	messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-// 	appId: process.env.FIREBASE_APP_ID,
-// };
-
-export const firebaseConfig = {
+  export const firebaseConfig = {
 	apiKey: "AIzaSyBzZfDNCqyrwUW8DvWSnEBn-Q-6mIzxADQ",
 	authDomain: "warp-themes-cf724.firebaseapp.com",
 	projectId: "warp-themes-cf724",
@@ -21,43 +12,36 @@ export const firebaseConfig = {
 	measurementId: "G-YY8ELH4ZN6"
   };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-const themesCollectionRef = collection(db, 'themes');
-
-async function checkThemesCollection() {
-	const querySnapshot = await getDocs(themesCollectionRef);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const themesCollectionRef = collection(db, 'themes');
   
-	if (querySnapshot.size === 0) {
-	} else {
-	  querySnapshot.forEach((doc) => {
-	  });
+  async function handler(request: NextApiRequest, response: NextApiResponse) {
+	if (request.method !== 'POST') {
+		response.status(405).end();
+		return;
 	}
-  }
-
-async function handler(request: NextApiRequest, response: NextApiResponse) {
-	checkThemesCollection();
-	if (request.method != 'POST') return;
-
-	let responseObj: { status: number; tId: string | number } = {
+  
+	// Initialize response object
+	const responseObj = {
 		status: -1,
 		tId: '',
 	};
-
+  
 	try {
 		const docRef = await addDoc(themesCollectionRef, {
-			name: request.body.name,
-			content: request.body.content,
-			username: request.body.username,
-		});
-		responseObj.status = 200;
-		responseObj.tId = docRef.id;
-	} catch (e) {
-		responseObj.status = 500;
-		responseObj.tId = -1;
-	}
-
+		name: request.body.name,
+		content: request.body.content,
+		themeUser: request.body.themeUser,
+		counter: 1,
+	});
+	responseObj.status = 200;
+	responseObj.tId = docRef.id;
 	response.status(responseObj.status).json(responseObj);
-}
-
-export default handler;
+} catch (error) {
+	response.status(500).json({ status: 500, tId: -1 });
+	}
+  }
+  
+  export default handler;
+  

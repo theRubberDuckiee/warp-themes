@@ -1,96 +1,82 @@
 import { useState } from 'react';
 import { useAppContext } from '@lib/AppContext';
 import { DownloadIcon } from '@heroicons/react/outline';
-import WarpAppNavbarSystemButtons from '@components/Create-Theme/Warp/Navbar/SystemButton';
-import { Dialog, Transition } from '@headlessui/react';
+import { Transition } from '@headlessui/react';
 import YAML from 'json-to-pretty-yaml';
 import toast from 'react-hot-toast';
-import { DownloadDialog } from '@components/Create-Theme/DownloadDialog';
+import React from 'react';
+import { DownloadTheme } from '@components/Shared/DownloadTheme';
 
 function Download() {
-	const [context, _] = useAppContext();
+	const [context, setContext] = useAppContext();
 	const [isOpen, setIsOpen] = useState(false);
 	const [tId, setTId] = useState(null);
 
 	async function prepareDownload() {
-		toast.custom(
-			(t) => (
-				<Transition
-					show={t.visible}
-					enter='transition-opacity duration-75'
-					enterFrom='opacity-0'
-					enterTo='opacity-100'
-					leave='transition-opacity duration-150'
-					leaveFrom='opacity-100'
-					leaveTo='opacity-0'
-				>
-					<div className='bg-white px-6 py-4 shadow-md rounded-md animate-pulse'>
-						<p>Preparing download...</p>
-					</div>
-				</Transition>
-			),
-			{
-				duration: 3000,
-			}
-		);
-
+	
 		try {
-			const json = await (
-				await fetch('/api/create', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
+			const response = await fetch('/api/create', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					name: context.themeData.name,
+					themeUser: {
+						displayName: context.user?.displayName ?? 'Anon',
+						photoURL: context.user?.photoURL,
+						uid: context.user?.uid,
+						description: context.user?.description,
 					},
-					body: JSON.stringify({
-						name: context.name,
-						username: context.username,
-						content: {
-							accent: context.content.accent,
-							background: context.content.background,
-							foreground: context.content.foreground,
-							details: context.content.details,
-							terminal_colors: context.content.terminal_colors,
-						},
-					}),
-				})
-			).json();
-
+					content: {
+						accent: context.themeData.content.accent,
+						background: context.themeData.content.background,
+						foreground: context.themeData.content.foreground,
+						details: context.themeData.content.details,
+						terminal_colors: context.themeData.content.terminal_colors,
+					},
+				}),
+			});
+	
+			if (!response.ok) {
+				throw new Error(`Failed to create theme. Status: ${response.status}`);
+			}
+	
+			const json = await response.json();
 			setTId(json.tId);
-		} catch (_) {
+		} catch (error) {
 			setTId(`h/${hashTheme()}`);
 		}
-
-		// finally open the modal
 		setIsOpen(true);
 	}
 
 	function hashTheme() {
 		const name = context.name;
 		const theme = YAML.stringify({
-			accent: context.content.accent,
-			background: context.content.background,
-			foreground: context.content.foreground,
-			details: context.content.details,
+			accent: context.themeData.content.accent,
+			background: context.themeData.content.background,
+			foreground: context.themeData.content.foreground,
+			details: context.themeData.content.details,
 			terminal_colors: {
 				normal: {
-					black: context.content.terminal_colors.normal.black,
-					red: context.content.terminal_colors.normal.red,
-					green: context.content.terminal_colors.normal.green,
-					yellow: context.content.terminal_colors.normal.yellow,
-					blue: context.content.terminal_colors.normal.blue,
-					magenta: context.content.terminal_colors.normal.magenta,
-					cyan: context.content.terminal_colors.normal.cyan,
-					white: context.content.terminal_colors.normal.white,
+					black: context.themeData.content.terminal_colors.normal.black,
+					red: context.themeData.content.terminal_colors.normal.red,
+					green: context.themeData.content.terminal_colors.normal.green,
+					yellow: context.themeData.content.terminal_colors.normal.yellow,
+					blue: context.themeData.content.terminal_colors.normal.blue,
+					magenta: context.themeData.content.terminal_colors.normal.magenta,
+					cyan: context.themeData.content.terminal_colors.normal.cyan,
+					white: context.themeData.content.terminal_colors.normal.white,
 				},
 				bright: {
-					black: context.content.terminal_colors.bright.black,
-					red: context.content.terminal_colors.bright.red,
-					green: context.content.terminal_colors.bright.green,
-					yellow: context.content.terminal_colors.bright.yellow,
-					blue: context.content.terminal_colors.bright.blue,
-					magenta: context.content.terminal_colors.bright.magenta,
-					cyan: context.content.terminal_colors.bright.cyan,
-					white: context.content.terminal_colors.bright.white,
+					black: context.themeData.content.terminal_colors.bright.black,
+					red: context.themeData.content.terminal_colors.bright.red,
+					green: context.themeData.content.terminal_colors.bright.green,
+					yellow: context.themeData.content.terminal_colors.bright.yellow,
+					blue: context.themeData.content.terminal_colors.bright.blue,
+					magenta: context.themeData.content.terminal_colors.bright.magenta,
+					cyan: context.themeData.content.terminal_colors.bright.cyan,
+					white: context.themeData.content.terminal_colors.bright.white,
 				},
 			},
 		});
@@ -104,7 +90,7 @@ function Download() {
 				Download
 			</button>
 
-			<DownloadDialog isOpen={isOpen} setIsOpen={setIsOpen} tId={tId}/>
+			<DownloadTheme isOpen={isOpen} setIsOpen={setIsOpen} />
 		</>
 	);
 }

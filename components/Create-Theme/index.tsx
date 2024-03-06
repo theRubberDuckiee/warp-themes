@@ -1,5 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import Download from './Download';
+import React from 'react';
+import AppDialogITermColors from '@components/ITerm2';
+import WarpYaml from '@components/WarpYaml';
 
 interface Props {
 	Navbar: ReactNode;
@@ -8,6 +11,8 @@ interface Props {
 }
 
 function CreateThemeLayout(props: Props) {
+	const [iTerm2IsOpen, setIsITerm2Open] = useState(false)
+	const [isYamlOpen, setIsYamlOpen] = useState(false)
 	return (
 		<div className='flex h-screen flex-col bg-slate-100 sm:bg-white overflow-y-hidden'>
 			<div className='w-full border-b z-20 hidden sm:block'>{props.Navbar}</div>
@@ -18,6 +23,14 @@ function CreateThemeLayout(props: Props) {
 						{props.WarpApp}
 					</div>
 					<Download/>
+					<button onClick={() => setIsITerm2Open(true)} className='btn btn-primary gap-2 mt-8'>
+						Upload ITerm2 Theme
+					</button>
+					<button onClick={() => setIsYamlOpen(true)} className='btn btn-primary gap-2 mt-8'>
+						Upload Warp Theme
+					</button>
+					<AppDialogITermColors _open={iTerm2IsOpen} _onClose={() => setIsITerm2Open(false)} />
+					<WarpYaml _open={isYamlOpen} _onClose={() => setIsYamlOpen(false)} />
 					<div className='alert alert-warning shadow-lg landscape:hidden lg:hidden scale-150 sm:scale-100 mt-12'>
 						<div>
 							<svg

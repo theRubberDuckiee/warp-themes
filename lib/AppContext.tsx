@@ -1,5 +1,6 @@
-import { Theme, ThemeData } from 'interface';
+import { Theme, ThemeData, AppInterface } from 'interface';
 import { createContext, useContext, useState } from 'react';
+import React from 'react';
 
 const defaultTheme: Theme = {
 	accent: '#00c2ff',
@@ -30,10 +31,14 @@ const defaultTheme: Theme = {
 	},
 }
 
-const defaultContext: ThemeData = {
-	name: 'warp_dark',
-	content: defaultTheme,
-	username: "Nobody"
+const defaultContext: AppInterface = {
+	themeData: {
+		name: 'warp_dark',
+		content: defaultTheme,
+		themeUser: null,
+		counter: 0,
+	},
+	user: null,
 };
 
 const AppContext = createContext<any>(defaultContext);
@@ -44,7 +49,7 @@ function AppWrapper({ children }) {
 	return <AppContext.Provider value={[context, setContext]}>{children}</AppContext.Provider>;
 }
 
-function useAppContext() {
+function useAppContext(): AppInterface {
 	return useContext(AppContext);
 }
 
