@@ -1,6 +1,6 @@
 import React from 'react';
 import SimplifiedNeofetch from './SimplifiedNeofetch';
-import { ThemeData } from 'interface';
+import { ThemeData } from 'interface/interface';
 
 interface Props {
     theme: ThemeData;

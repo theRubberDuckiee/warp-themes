@@ -1,6 +1,6 @@
 import { coolNightThemeData, cyberpinkThemeData, draculaThemeData, gruvboxDarkThemeData, linuxLaunchThemeData, retrowaveThemeData, seashellThemeData } from "constants/themeConstants";
 import ThemeCard from "./ThemeCard";
-import { FeaturedThemeData } from "interface";
+import { FeaturedThemeData } from "interface/interface";
 import React from 'react';
 
 export default function FeaturedCommunityThemes() {

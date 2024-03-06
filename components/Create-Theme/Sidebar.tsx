@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import ColorInput from './ColorInput';
 import { Tab } from '@headlessui/react';
 import ThemeInput from './ThemeInput';
-import { AppInterface } from 'interface';
+import { AppInterface } from 'interface/interface';
 
 function AppSidebar() {
     const [context, setContext] = useAppContext();

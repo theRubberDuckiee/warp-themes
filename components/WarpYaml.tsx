@@ -29,11 +29,9 @@ function WarpYaml(props: Props) {
         }
         try {
             const response = await fetch(fileURL);
-            console.log(response)
             if (response.status !== 200) throw new Error();
             const bla = await response.text()
             const parsedData = yaml.load(bla)
-            console.log(parsedData)
             setContext({
                 ...context,
                 themeData: {
@@ -57,14 +55,18 @@ function WarpYaml(props: Props) {
 
                 <div className='fixed inset-0 flex items-center justify-center p-4'>
                     <Dialog.Panel className='mx-auto  w-fit rounded-lg shadow-lg bg-white px-12 py-7'>
-                        <Dialog.Title className='text-3xl font-semibold mb-4'>iTerm Color Scheme</Dialog.Title>
+                        <Dialog.Title className='text-3xl font-semibold mb-4'>Warp Theme Schema</Dialog.Title>
                         <input
                             type='checkbox'
                             id='iterm-modal'
                             className='modal-toggle'
                             aria-label='Toggle iTerm Modal'
                         />
-                        <p className='mb-2'>Load iTerm Color Scheme from URL.</p>
+                        <p className='mb-2'>Load Warp Color Scheme from URL.</p>
+                        <p className='mb-2'> You can check out our Github repo 
+                            <a target="_blank" rel="noopener noreferrer" className='text-blue-500' href="https://github.com/warpdotdev/themes"> here.
+                            </a>
+                        </p>
                         <div className='form-control'>
                             <div className='input-group'>
                                 <input

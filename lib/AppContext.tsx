@@ -1,4 +1,4 @@
-import { Theme, ThemeData, AppInterface } from 'interface';
+import { Theme, ThemeData, AppInterface } from 'interface/interface';
 import { createContext, useContext, useState } from 'react';
 import React from 'react';
 
@@ -49,7 +49,7 @@ function AppWrapper({ children }) {
 	return <AppContext.Provider value={[context, setContext]}>{children}</AppContext.Provider>;
 }
 
-function useAppContext(): AppInterface {
+function useAppContext() {
 	return useContext(AppContext);
 }
 

@@ -1,6 +1,6 @@
 import ThemePreview from './ThemePreview';
 import { DownloadTheme } from '@components/Shared/DownloadTheme';
-import { ThemeData } from 'interface';
+import { ThemeData } from 'interface/interface';
 import Link from 'next/link';
 import React, { useState } from 'react';
 

@@ -29,15 +29,12 @@
 	};
   
 	try {
-		console.log('fuck you')
 		const docRef = await addDoc(themesCollectionRef, {
 		name: request.body.name,
 		content: request.body.content,
 		themeUser: request.body.themeUser,
 		counter: 0,
 	});
-	console.log('docRef', docRef)
-	console.log('docRefid', docRef.id)
 	responseObj.status = 200;
 	responseObj.tId = docRef.id;
 	response.status(responseObj.status).json(responseObj);

@@ -2,7 +2,7 @@ import { TerminalType } from "constants/downloadConstants";
 import { initializeApp } from "firebase/app";
 import { doc, getFirestore, increment, updateDoc } from "firebase/firestore";
 import hexRgb from "hex-rgb";
-import { Theme, ThemeData } from "interface";
+import { Theme, ThemeData } from "interface/interface";
 import YAML from 'json-to-pretty-yaml';
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -415,25 +415,60 @@ export function getiTerm2Theme(theme) {
 return iTerm2Theme
 }
 
+export async function prepareDownload(context, setContext) {
+		const response = await fetch('/api/create', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				name: context.themeData.name,
+				themeUser: {
+					displayName: context.user?.displayName ?? 'Anon',
+					photoURL: context.user?.photoURL,
+					uid: context.user?.uid,
+					description: context.user?.description,
+				},
+				content: {
+					accent: context.themeData.content.accent,
+					background: context.themeData.content.background,
+					foreground: context.themeData.content.foreground,
+					details: context.themeData.content.details,
+					terminal_colors: context.themeData.content.terminal_colors,
+				},
+			}),
+		});
+
+		if (!response.ok) {
+			throw new Error(`Failed to create theme. Status: ${response.status}`);
+		}
+
+		const json = await response.json();
+		setContext({
+			...context,
+			themeData: {
+				...context.themeData,
+				tId: json.tId
+			}
+		});
+}
+
 export async function downloadTheme(terminalType: TerminalType, theme: ThemeData, themeName: string, setDoneDownloading: Dispatch<SetStateAction<boolean>>) {
 	const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
 	const extension = terminalType === TerminalType.Warp ? 'yaml' : 'itermcolors';
 	const yamlBlob = new Blob([themeYaml], { type: `application/${extension}` });
-	console.log('a')
 	try {
 		const yamlObjectURL = window.URL.createObjectURL(yamlBlob);
 		const yamlDownloadLink = document.createElement('a');
 		yamlDownloadLink.href = yamlObjectURL;
 		yamlDownloadLink.download = `${themeName}.yaml`;
 		document.body.appendChild(yamlDownloadLink);
-		console.log('b')
 		// Trigger download for the YAML file
 		yamlDownloadLink.click();
 
 		// Clean up
 		yamlDownloadLink.remove();
 		window.URL.revokeObjectURL(yamlObjectURL);
-		console.log('c')
 		if (theme.backgroundImageSrc) {
 			// Create download link for the PNG file
 			const pngDownloadLink = document.createElement('a');
@@ -445,7 +480,6 @@ export async function downloadTheme(terminalType: TerminalType, theme: ThemeData
 			pngDownloadLink.click();
 			pngDownloadLink.remove();
 		}
-		console.log('d')
 		const firebaseConfig = {
 			apiKey: "AIzaSyBzZfDNCqyrwUW8DvWSnEBn-Q-6mIzxADQ",
 			authDomain: "warp-themes-cf724.firebaseapp.com",
@@ -458,13 +492,15 @@ export async function downloadTheme(terminalType: TerminalType, theme: ThemeData
 		
 		const app = initializeApp(firebaseConfig);
 		const db = getFirestore(app);
-		console.log('themeid', theme)
-		const docRef = doc(db, 'themes', theme.tId);
-		console.log('f')
-		await updateDoc(docRef, {
-			counter: increment(1)
-		});
-		console.log('f')
+
+		try {
+			const docRef = doc(db, 'themes', theme.tId);
+			await updateDoc(docRef, {
+				counter: increment(1)
+			});
+		}
+		catch{
+		}
 		setDoneDownloading(true)
 	} catch (error) {
 		console.error('Error:', error);

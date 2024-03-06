@@ -1,4 +1,4 @@
-import { FeaturedThemeData, Theme } from "interface";
+import { FeaturedThemeData, Theme } from "interface/interface";
 
 export const gruvboxDarkTheme = {
     'accent': '#458588',

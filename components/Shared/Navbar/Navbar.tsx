@@ -10,6 +10,7 @@ import LogoutButton from '@components/Login/Logout';
 import React from 'react';
 import { useAppContext } from '@lib/AppContext';
 import { fetchTwitterUserDescription } from 'utils/getUserInfoUtils';
+import { ApiUser } from 'interface/apiInterface';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBzZfDNCqyrwUW8DvWSnEBn-Q-6mIzxADQ",
@@ -28,14 +29,13 @@ function AppNavbar() {
   const [context, setContext] = useAppContext();
 
   useEffect(() => {
-    // Set user in appContext when the component mounts for the first time
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      let userDescription = undefined
+    const unsubscribe = onAuthStateChanged(auth, async (apiUser: any) => {
+      const user = apiUser as ApiUser
       if (user) {
-        userDescription = await fetchTwitterUserDescription(user.reloadUserInfo.screenName);
+        const userDescription = await fetchTwitterUserDescription(user.reloadUserInfo.screenName);
         setContext({...context, user: {
-          displayName: user.displayName,
-          photoURL: user.photoURL,
+          displayName: user.reloadUserInfo.displayName,
+          photoURL: user.reloadUserInfo.photoUrl,
           uid: user.uid,
           description: userDescription,
       }});

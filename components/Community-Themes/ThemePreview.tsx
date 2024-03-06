@@ -1,7 +1,7 @@
 import SimplifiedBlock from "./SimplifiedBlock";
 import SimplifiedNavBar from "./SimplifiedNavBar";
 import SimplifiedPrompt from "./SimplifiedPrompt";
-import { ThemeData } from "interface";
+import { ThemeData } from "interface/interface";
 import React from 'react';
 
 interface Props {

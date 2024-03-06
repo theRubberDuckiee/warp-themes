@@ -1,4 +1,4 @@
-import { ThemeData } from 'interface';
+import { ThemeData } from 'interface/interface';
 import React from 'react';
 
 interface Props {

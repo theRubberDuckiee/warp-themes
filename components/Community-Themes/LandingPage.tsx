@@ -3,7 +3,7 @@ import AllCommunityThemes from './AllCommunityThemes';
 import FeaturedCommunityThemes from './FeaturedCommunityThemes';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import * as ga from '../../utils/utils';
-import { ThemeData } from 'interface';
+import { ThemeData } from 'interface/interface';
 import React, { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 
@@ -31,11 +31,7 @@ export default function LandingPage() {
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const themesCollectionRef = collection(db, 'themes');
-        console.log('themesCollectionRef', themesCollectionRef.firestore.app.name)
-        console.log('hi')
         const querySnapshot = await getDocs(themesCollectionRef);
-        console.log('heyx')
-        console.log('querySnapshot', querySnapshot)
 
         if (querySnapshot.size !== 0) {
           const themesData: ThemeData[] = [];

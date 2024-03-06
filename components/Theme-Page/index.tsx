@@ -2,7 +2,7 @@ import { DownloadTheme } from '@components/Shared/DownloadTheme';
 import ThemePreview from '@components/Community-Themes/ThemePreview';
 import GoogleSignInButton from '@components/Login/Login';
 import AppNavbar from '@components/Shared/Navbar/Navbar';
-import { ThemeData } from 'interface';
+import { ThemeData } from 'interface/interface';
 import { useState } from 'react';
 import React from 'react';
 

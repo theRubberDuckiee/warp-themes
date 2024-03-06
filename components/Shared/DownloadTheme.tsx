@@ -1,11 +1,12 @@
 import { Dialog } from '@headlessui/react';
 import DownloadIcon from '@heroicons/react/outline/DownloadIcon';
-import { ThemeData } from 'interface';
+import { ThemeData } from 'interface/interface';
 import { Dispatch, SetStateAction, useState } from 'react';
 import React from 'react';
-import { useAppContext } from '@lib/AppContext';
+import { useAppContext } from "../../lib/AppContext"
 import { OperatingSystem, TerminalType, linuxWarpThemeFolder, macWarpThemeFolder } from 'constants/downloadConstants';
-import { downloadTheme, getWarpManualDownloadInstructionCustomBackgroundImage, getWarpManualDownloadInstructionNoBackgroundImage, getiTerm2ManualDownloadInstructionCustomBackgroundImage } from 'utils/downloadThemeUtils';
+import { downloadTheme, getWarpManualDownloadInstructionCustomBackgroundImage, getWarpManualDownloadInstructionNoBackgroundImage, getiTerm2ManualDownloadInstructionCustomBackgroundImage, prepareDownload } from 'utils/downloadThemeUtils';
+import { signInWithTwitter } from 'utils/loginUtils';
 
 interface Props {
     isOpen: boolean,
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
-    const [context] = useAppContext();
+    const [context, setContext] = useAppContext();
     
     if (!theme) {
         theme = context.themeData
@@ -24,14 +25,48 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
     const [os, setOs] = useState(OperatingSystem.Linux)
     const themeName = theme.name.replace(/\s/g, "")
     const themePath = os == OperatingSystem.Mac ? macWarpThemeFolder : linuxWarpThemeFolder
+    const [doneSharing, setDoneSharing] = useState(false)
+
+    async function shareTheme() {
+        // Check if user is signed in
+        if (!context.user) {
+            await signInWithTwitter()
+        }
+
+        // When signed in, create theme
+        await prepareDownload(context, setContext)
+        setDoneSharing(true)
+    }
 
     return (
         <Dialog open={isOpen} onClose={() => setIsOpen(false)} className='absolute z-30'>
             <div className='fixed inset-0 flex items-center justify-center p-4'>
-                <Dialog.Panel className='mx-auto max-w-5xl w-fit rounded-lg shadow-lg bg-white px-12 py-7'>
-                    <Dialog.Title className='text-3xl font-semibold mb-4'>Download</Dialog.Title>
                     {doneDownloading ?
-                    <> ppeeenis</>:
+                    <Dialog.Panel className='mx-auto max-w-2xl w-fit rounded-lg shadow-lg bg-white px-12 py-7'>
+                        <Dialog.Title className='text-3xl font-semibold mb-4'>Share your theme with the community!</Dialog.Title>
+                        <div className='text-gray-700'>
+                        {doneSharing ? 
+                        <div className="mt-4 mb-4">
+                        Shared!
+                        </div>
+                        :
+                        <div className="mt-4 mb-4">
+                        This will ask you to sign in. Once you're signed in, your theme will be uploaded to our website
+                        and you can view it on our landing page and share it out with friends.
+                        </div>
+                        }
+                        <button
+                            onClick={() => shareTheme()}
+                            className='btn mt-2 btn-primary flex items-center gap-2'
+                        >
+                            Share
+                        </button>
+
+                        </div>
+                    </Dialog.Panel>
+                    :
+                    <Dialog.Panel className='mx-auto max-w-5xl w-fit rounded-lg shadow-lg bg-white px-12 py-7'>
+                    <Dialog.Title className='text-3xl font-semibold mb-4'>Download</Dialog.Title>
                     <div className='text-gray-700'>
                         <h2 className='text-2xl font-medium mb-3'>Manual Installation</h2>
                         <h3 className='text-xl py-3'>Instructions</h3>
@@ -114,8 +149,9 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
                             <DownloadIcon className='w-6 h-6' />
                             Download file
                         </button>
-                    </div>}
-                </Dialog.Panel>
+                    </div>
+                    </Dialog.Panel>
+                    }
             </div>
         </Dialog>
     )

@@ -2,7 +2,7 @@ import { WarpAppBlockDivider } from "@components/Create-Theme/Warp/Block";
 import WarpAppNavbarSystemButtons from "@components/Create-Theme/Warp/Navbar/SystemButton";
 import ThemeTab from "./ThemeTab";
 import React from 'react';
-import { ThemeData } from "interface";
+import { ThemeData } from "interface/interface";
 
 interface Props {
     theme: ThemeData;

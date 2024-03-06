@@ -10,44 +10,6 @@ function Download() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [tId, setTId] = useState(null);
 
-	async function prepareDownload() {
-	
-		try {
-			const response = await fetch('/api/create', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					name: context.themeData.name,
-					themeUser: {
-						displayName: context.user?.displayName ?? 'Anon',
-						photoURL: context.user?.photoURL,
-						uid: context.user?.uid,
-						description: context.user?.description,
-					},
-					content: {
-						accent: context.themeData.content.accent,
-						background: context.themeData.content.background,
-						foreground: context.themeData.content.foreground,
-						details: context.themeData.content.details,
-						terminal_colors: context.themeData.content.terminal_colors,
-					},
-				}),
-			});
-	
-			if (!response.ok) {
-				throw new Error(`Failed to create theme. Status: ${response.status}`);
-			}
-	
-			const json = await response.json();
-			setTId(json.tId);
-		} catch (error) {
-			setTId(`h/${hashTheme()}`);
-		}
-		setIsOpen(true);
-	}
-
 	function hashTheme() {
 		const name = context.name;
 		const theme = YAML.stringify({
@@ -83,7 +45,7 @@ function Download() {
 
 	return (
 		<>
-			<button onClick={prepareDownload} className='btn btn-primary gap-2'>
+			<button onClick={() => setIsOpen(true)} className='btn btn-primary gap-2'>
 				<DownloadIcon className='w-6 h-6' />
 				Download
 			</button>

@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import ThemeCard from './ThemeCard';
-import { ThemeData } from 'interface';
+import { ThemeData } from 'interface/interface';
 
 interface Props {
   setUploadedThemesCount: Dispatch<SetStateAction<number>>,
