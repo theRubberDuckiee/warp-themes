@@ -4,8 +4,7 @@ import { doc, getFirestore, increment, updateDoc } from "firebase/firestore";
 import hexRgb from "hex-rgb";
 import { Theme, ThemeData } from "interface";
 import YAML from 'json-to-pretty-yaml';
-import { db } from "pages/api/create";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 export function getWarpTheme(theme: Theme) {
     const yamlData = {
@@ -416,25 +415,25 @@ export function getiTerm2Theme(theme) {
 return iTerm2Theme
 }
 
-export async function downloadTheme(terminalType: TerminalType, theme: ThemeData, themeName: string) {
+export async function downloadTheme(terminalType: TerminalType, theme: ThemeData, themeName: string, setDoneDownloading: Dispatch<SetStateAction<boolean>>) {
 	const themeYaml = terminalType === TerminalType.Warp ? getWarpTheme(theme.content) : getiTerm2Theme(theme.content);
 	const extension = terminalType === TerminalType.Warp ? 'yaml' : 'itermcolors';
 	const yamlBlob = new Blob([themeYaml], { type: `application/${extension}` });
-
+	console.log('a')
 	try {
 		const yamlObjectURL = window.URL.createObjectURL(yamlBlob);
 		const yamlDownloadLink = document.createElement('a');
 		yamlDownloadLink.href = yamlObjectURL;
 		yamlDownloadLink.download = `${themeName}.yaml`;
 		document.body.appendChild(yamlDownloadLink);
-
+		console.log('b')
 		// Trigger download for the YAML file
 		yamlDownloadLink.click();
 
 		// Clean up
 		yamlDownloadLink.remove();
 		window.URL.revokeObjectURL(yamlObjectURL);
-
+		console.log('c')
 		if (theme.backgroundImageSrc) {
 			// Create download link for the PNG file
 			const pngDownloadLink = document.createElement('a');
@@ -446,6 +445,7 @@ export async function downloadTheme(terminalType: TerminalType, theme: ThemeData
 			pngDownloadLink.click();
 			pngDownloadLink.remove();
 		}
+		console.log('d')
 		const firebaseConfig = {
 			apiKey: "AIzaSyBzZfDNCqyrwUW8DvWSnEBn-Q-6mIzxADQ",
 			authDomain: "warp-themes-cf724.firebaseapp.com",
@@ -458,11 +458,14 @@ export async function downloadTheme(terminalType: TerminalType, theme: ThemeData
 		
 		const app = initializeApp(firebaseConfig);
 		const db = getFirestore(app);
+		console.log('themeid', theme)
 		const docRef = doc(db, 'themes', theme.tId);
+		console.log('f')
 		await updateDoc(docRef, {
 			counter: increment(1)
 		});
-		
+		console.log('f')
+		setDoneDownloading(true)
 	} catch (error) {
 		console.error('Error:', error);
 	}

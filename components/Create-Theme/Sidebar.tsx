@@ -3,9 +3,10 @@ import React, { Fragment } from 'react';
 import ColorInput from './ColorInput';
 import { Tab } from '@headlessui/react';
 import ThemeInput from './ThemeInput';
+import { AppInterface } from 'interface';
 
 function AppSidebar() {
-    const [context, setContext] = useAppContext<AppInterface>();
+    const [context, setContext] = useAppContext();
 
 	const styles = [
 		'w-full rounded-md outline-none bg-gray-100',

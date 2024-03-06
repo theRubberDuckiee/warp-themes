@@ -20,6 +20,7 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
         theme = context.themeData
     }
     const [terminal, setTerminal] = useState(TerminalType.Warp)
+    const [doneDownloading, setDoneDownloading] = useState(false)
     const [os, setOs] = useState(OperatingSystem.Linux)
     const themeName = theme.name.replace(/\s/g, "")
     const themePath = os == OperatingSystem.Mac ? macWarpThemeFolder : linuxWarpThemeFolder
@@ -29,6 +30,8 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
             <div className='fixed inset-0 flex items-center justify-center p-4'>
                 <Dialog.Panel className='mx-auto max-w-5xl w-fit rounded-lg shadow-lg bg-white px-12 py-7'>
                     <Dialog.Title className='text-3xl font-semibold mb-4'>Download</Dialog.Title>
+                    {doneDownloading ?
+                    <> ppeeenis</>:
                     <div className='text-gray-700'>
                         <h2 className='text-2xl font-medium mb-3'>Manual Installation</h2>
                         <h3 className='text-xl py-3'>Instructions</h3>
@@ -105,13 +108,13 @@ export function DownloadTheme({ isOpen, setIsOpen, theme }: Props) {
                         </div>
 
                         <button
-                            onClick={() => { downloadTheme(terminal, theme, themeName) }}
+                            onClick={() => { downloadTheme(terminal, theme, themeName, setDoneDownloading) }}
                             className='btn mt-2 w-full btn-ghost flex items-center gap-2'
                         >
                             <DownloadIcon className='w-6 h-6' />
                             Download file
                         </button>
-                    </div>
+                    </div>}
                 </Dialog.Panel>
             </div>
         </Dialog>

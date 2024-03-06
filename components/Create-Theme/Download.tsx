@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useAppContext } from '@lib/AppContext';
 import { DownloadIcon } from '@heroicons/react/outline';
-import { Transition } from '@headlessui/react';
 import YAML from 'json-to-pretty-yaml';
-import toast from 'react-hot-toast';
 import React from 'react';
 import { DownloadTheme } from '@components/Shared/DownloadTheme';
 

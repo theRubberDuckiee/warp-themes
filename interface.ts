@@ -39,6 +39,7 @@ export interface ThemeData {
     counter: number,
     backgroundImageSrc?: string
     tId?: string
+    username?: string
 }
 
 export interface AppInterface {

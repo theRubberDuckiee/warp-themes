@@ -6,7 +6,6 @@ import * as ga from '../../utils/utils';
 import { ThemeData } from 'interface';
 import React, { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
-import AppDialogITermColors from '@components/ITerm2';
 
 export default function LandingPage() {
   const [view, setView] = useState<'featured' | 'all'>('featured');
@@ -32,7 +31,11 @@ export default function LandingPage() {
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const themesCollectionRef = collection(db, 'themes');
+        console.log('themesCollectionRef', themesCollectionRef.firestore.app.name)
+        console.log('hi')
         const querySnapshot = await getDocs(themesCollectionRef);
+        console.log('heyx')
+        console.log('querySnapshot', querySnapshot)
 
         if (querySnapshot.size !== 0) {
           const themesData: ThemeData[] = [];

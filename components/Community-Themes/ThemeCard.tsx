@@ -29,20 +29,20 @@ function ThemeCard({imgSrc, theme}: Props) {
             </div>
             <div className="px-8 flex justify-between items-center py-4">
                 <div className="flex items-center">
-                    <span className="">
+                    <span className="mr-4">
                         Created by: {theme.themeUser?.displayName ?? theme.username}
                     </span>
                     {theme.themeUser?.photoURL &&
-                        <div className='flex relative'>
+                        <div className="flex relative">
                             <img
                                 src={theme.themeUser?.photoURL}
                                 alt={theme.themeUser?.displayName ?? 'Anon'}
-                                className="w-10 h-10 rounded-full ml-auto mr-2"
+                                className="w-10 h-10 rounded-full ml-auto mr-4"
                                 onMouseEnter={() => setShowTooltip(true)} // Show tooltip on mouse enter
                                 onMouseLeave={() => setShowTooltip(false)} // Hide tooltip on mouse leave
                             />
                             {showTooltip && (
-                                <div className="absolute top-0 left-14 bg-gray-800 text-white border border-gray-300 p-2 rounded shadow">
+                                <div className="mb-4 absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white border border-gray-300 p-2 rounded shadow">
                                     {theme.themeUser?.description || 'No description available'}
                                 </div>
                             )}
